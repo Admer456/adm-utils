@@ -1,3 +1,18 @@
+
+#
+## Input:
+## - ADMUTIL_NONLIB
+##   Whether or not the library should be embedded into a project,
+##   instead of being used as a static library
+#
+## Output:
+## - ADMUTIL_INCLUDE_DIRECTORY
+##   When you use the library, you use this.
+##   No need to do find_package( AdmUtils ) or anything like that
+#
+## You can expect .lib files in the libs/ folder after installing
+#
+
 ## Minimum is 3.16 for PCH support
 cmake_minimum_required( VERSION 3.16 )
 
@@ -12,43 +27,32 @@ endif()
 
 set( ADMUTIL_ROOT ${CMAKE_CURRENT_SOURCE_DIR} )
 
-set( ADMUTIL_SRC
-		src/Precompiled.hpp )
-
-set ( ADMUTIL_CONTAINERS_SRC 
+set( ADMUTIL_SOURCES
+		src/Precompiled.hpp
         src/Containers/Dictionary.hpp
         src/Containers/Dictionary.cpp
-        src/Containers/Singleton.hpp )
-
-set( ADMUTIL_MATHS_SRC 
+        src/Containers/Singleton.hpp 
 		src/Maths/Vec3.hpp 
-		src/Maths/Vec3.cpp )
-
-set( ADMUTIL_TEXT_SRC 
+		src/Maths/Vec3.cpp 
         src/Text/Lexer.hpp        
-        src/Text/Lexer.cpp )
-
-set( ADMUTIL_TIME_SRC 
+        src/Text/Lexer.cpp 
 		src/Time/Timer.hpp
 		src/Time/Timer.cpp )
 
-source_group( "Source\\" FILES ${ADMUTIL_SRC} )
-source_group( "Source\\Containers\\" FILES ${ADMUTIL_CONTAINERS_SRC} )
-source_group( "Source\\Maths\\" FILES ${ADMUTIL_MATHS_SRC} )
-source_group( "Source\\Text\\" FILES ${ADMUTIL_TEXT_SRC} )
-source_group( "Source\\Time\\" FILES ${ADMUTIL_TIME_SRC} )
+## User of this library: this is what you're interested in
+set ( ADMUTIL_INCLUDE_DIRECTORY
+        ${ADMUTIL_ROOT}/src )
 
-set ( ADMUTIL_ALL_SRC 
-        ${ADMUTIL_SRC}
-        ${ADMUTIL_CONTAINERS_SRC}
-        ${ADMUTIL_MATHS_SRC}
-        ${ADMUTIL_TEXT_SRC}
-        ${ADMUTIL_TIME_SRC} )
+## If someone's embedding this, let them group the sources 
+## as they wish
+if ( NOT ADMUTIL_NONLIB )
+    source_group( TREE ${ADMUTIL_ROOT} FILES ${ADMUTIL_SOURCES} )
+endif()
 
 if ( NOT ADMUTIL_NONLIB )
     ## AdmUtils.lib
     add_library( AdmUtils 
-            ${ADMUTIL_ALL_SRC} )
+            ${ADMUTIL_SOURCES} )
     
     ## Lib output dir
     set_target_properties( AdmUtils PROPERTIES
@@ -56,11 +60,17 @@ if ( NOT ADMUTIL_NONLIB )
     
     ## Include directories
     target_include_directories( AdmUtils PRIVATE
-    		${ADMUTIL_ROOT}/src )
+    		${ADMUTIL_INCLUDE_DIRECTORY} )
 
     ## Precompiled headers
     target_precompile_headers( AdmUtils PRIVATE 
             src/Precompiled.hpp )
+
+    ## Output directory
+    install( TARGETS AdmUtils
+            RUNTIME DESTINATION ${ADMUTIL_ROOT}/libs
+            LIBRARY DESTINATION ${ADMUTIL_ROOT}/libs 
+            ARCHIVE DESTINATION ${ADMUTIL_ROOT}/libs )
 else()
-    include_directories( ${ADMUTIL_ROOT}/src )
+    include_directories( ${ADMUTIL_INCLUDE_DIRECTORY} )
 endif()
