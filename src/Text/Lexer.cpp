@@ -100,9 +100,20 @@ std::string Lexer::Next()
 	return result;
 }
 
-bool Lexer::Expect( const char* expectedToken)
+bool Lexer::Expect( const char* expectedToken, bool advance )
 {
-	return Next() == expectedToken;
+	size_t oldPosition = position;
+	
+	std::string nextToken = Next();
+	
+	if ( !advance )
+	{
+		position = oldPosition;
+	}
+
+	return nextToken == expectedToken;
+}
+
 bool Lexer::IsEndOfFile() const
 {
 	return position >= buffer.size();

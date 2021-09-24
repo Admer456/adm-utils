@@ -24,7 +24,7 @@ namespace adm
 
 		// Gets the next token
 		std::string		Next();
-		bool			Expect( const char* expectedToken );
+		bool			Expect( const char* expectedToken, bool advance = false );
 		bool			IsEndOfFile() const;
 
 	private:
