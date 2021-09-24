@@ -13,7 +13,7 @@ Timer::Timer()
 // ============================
 // Timer::GetElapsed
 // ============================
-float Timer::GetElapsed( const TimeUnit& tu, const bool& reset )
+float Timer::GetElapsed( const TimeUnit& tu ) const
 {
     float elapsed = 0.0f;
 
@@ -22,15 +22,22 @@ float Timer::GetElapsed( const TimeUnit& tu, const bool& reset )
 
     switch ( tu )
     {
-        case Timer::Seconds: elapsed = seconds; break;
-        case Timer::Milliseconds: elapsed = seconds * 1000.0f; break;
-        case Timer::Microseconds: elapsed = seconds * 1000000.0f; break;
+    case Timer::Seconds: elapsed = seconds; break;
+    case Timer::Milliseconds: elapsed = seconds * 1000.0f; break;
+    case Timer::Microseconds: elapsed = seconds * 1000000.0f; break;
     }
 
-    if ( reset )
-    {
-        Reset();
-    }
+    return elapsed;
+}
+
+// ============================
+// Timer::GetElapsed
+// ============================
+float Timer::GetElapsedAndReset( const TimeUnit& tu )
+{
+    float elapsed = GetElapsed( tu );
+
+    Reset();
 
     return elapsed;
 }

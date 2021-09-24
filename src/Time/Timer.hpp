@@ -19,8 +19,10 @@ namespace adm
 		Timer();
 		~Timer() = default;
 
+		// Gets the time that has passed - const version
+		float	GetElapsed( const Timer::TimeUnit& tu = Milliseconds ) const;
 		// Gets the time that has passed
-		float 	GetElapsed( const TimeUnit& tu = Milliseconds, const bool& reset = true );
+		float 	GetElapsedAndReset( const Timer::TimeUnit& tu = Milliseconds );
 		// Resets the timer
 		void 	Reset();
 
