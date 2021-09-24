@@ -11,6 +11,8 @@ namespace adm
 		Lexer();
 		Lexer( Lexer&& other ) noexcept;
 		Lexer( const Lexer& other );
+		Lexer( std::fstream& fileStream );
+		Lexer( std::ifstream& fileStream );
 		~Lexer();
 
 		Lexer( const char* text );

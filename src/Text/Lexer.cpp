@@ -19,6 +19,32 @@ Lexer::Lexer( const Lexer& other )
 	Load( other.buffer );
 }
 
+Lexer::Lexer( std::fstream& fileStream )
+{
+	std::string line, text;
+	std::istringstream sstream;
+	while ( std::getline( fileStream, line ) )
+	{
+		sstream >> line;
+	}
+
+	text = sstream.str();
+	Load( text );
+}
+
+Lexer::Lexer( std::ifstream& fileStream )
+{
+	std::string line, text;
+	std::istringstream sstream;
+	while ( std::getline( fileStream, line ) )
+	{
+		sstream >> line;
+	}
+
+	text = sstream.str();
+	Load( text );
+}
+
 Lexer::~Lexer()
 {
 	Clear();
