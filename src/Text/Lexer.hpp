@@ -25,6 +25,7 @@ namespace adm
 		// Gets the next token
 		std::string		Next();
 		bool			Expect( const char* expectedToken );
+		bool			IsEndOfFile() const;
 
 	private:
 		bool			CanAdd() const;
@@ -32,7 +33,6 @@ namespace adm
 		
 		bool			IsComment() const;
 		bool			IsEndOfLine() const;
-		bool			IsEndOfFile() const;
 
 		void			NewLine();
 

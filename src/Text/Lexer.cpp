@@ -103,6 +103,9 @@ std::string Lexer::Next()
 bool Lexer::Expect( const char* expectedToken)
 {
 	return Next() == expectedToken;
+bool Lexer::IsEndOfFile() const
+{
+	return position >= buffer.size();
 }
 
 bool Lexer::CanAdd() const
@@ -148,11 +151,6 @@ bool Lexer::IsComment() const
 bool Lexer::IsEndOfLine() const
 {
 	return view[position] == '\n';
-}
-
-bool Lexer::IsEndOfFile() const
-{
-	return position >= buffer.size();
 }
 
 void Lexer::NewLine()
