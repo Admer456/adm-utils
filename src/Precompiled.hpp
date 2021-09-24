@@ -1,4 +1,6 @@
 
+#pragma once
+
 // C++ STL includes
 
 // Containers

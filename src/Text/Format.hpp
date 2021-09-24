@@ -1,4 +1,6 @@
 
+#pragma once
+
 namespace adm
 {
     constexpr bool DebugFormat = false;
