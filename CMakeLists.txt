@@ -16,10 +16,10 @@
 ## Minimum is 3.16 for PCH support
 cmake_minimum_required( VERSION 3.16 )
 
-## C++17 babyyyy
-set(CMAKE_CXX_STANDARD 17) 
+## C++17's filesystem and inline static initialisers are pretty nice
+set( CMAKE_CXX_STANDARD 17 )
 
-OPTION( ADMUTIL_NONLIB "Bundle the library into another project instead of compiling a .lib; will define ADMUTIL_ALL_SRC which you can then include in your project" OFF )
+option( ADMUTIL_NONLIB "Bundle the library into another project instead of compiling a .lib; will define ADMUTIL_ALL_SRC which you can then include in your project" OFF )
 
 if ( NOT ADMUTIL_NONLIB )
     project( AdmUtils )
@@ -49,6 +49,12 @@ set ( ADMUTIL_INCLUDE_DIRECTORY
 ## as they wish
 if ( NOT ADMUTIL_NONLIB )
     source_group( TREE ${ADMUTIL_ROOT} FILES ${ADMUTIL_SOURCES} )
+endif()
+
+## UNICODE, UNICODE, UNICODE
+if ( WIN32 )
+    add_compile_definitions( UNICODE )
+    add_compile_definitions( _UNICODE )
 endif()
 
 if ( NOT ADMUTIL_NONLIB )
