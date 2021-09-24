@@ -18,16 +18,22 @@
 // Misc
 #include <chrono>
 #include <type_traits>
+#include <stdarg.h>
+
+// The most basic thing of all
+// Defines some compile-time constants like adm::Debug
+#include "Platform.hpp"
 
 // Text processing
-#include "Text/Lexer.hpp"
+#include "Text/Format.hpp" // Variadic adm::format
+#include "Text/Lexer.hpp" // Text parsing
 
 // Game maths
-#include "Maths/Vec3.hpp"
+#include "Maths/Vec3.hpp" // 3D vector
 
 // Containers and utilities
-#include "Containers/Singleton.hpp"
-#include "Containers/Dictionary.hpp"
+#include "Containers/Singleton.hpp" // Singleton wrapper
+#include "Containers/Dictionary.hpp" // Dictionary/KV pairs
 
 // Time utilities
-#include "Time/Timer.hpp"
+#include "Time/Timer.hpp" // Scope-based timer

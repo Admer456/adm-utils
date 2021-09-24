@@ -28,12 +28,14 @@ endif()
 set( ADMUTIL_ROOT ${CMAKE_CURRENT_SOURCE_DIR} )
 
 set( ADMUTIL_SOURCES
+		src/Platform.hpp
 		src/Precompiled.hpp
         src/Containers/Dictionary.hpp
         src/Containers/Dictionary.cpp
         src/Containers/Singleton.hpp 
 		src/Maths/Vec3.hpp 
 		src/Maths/Vec3.cpp 
+        src/Text/Format.hpp        
         src/Text/Lexer.hpp        
         src/Text/Lexer.cpp 
 		src/Time/Timer.hpp
