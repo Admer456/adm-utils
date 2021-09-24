@@ -9,10 +9,14 @@ namespace adm
     class Singleton final
     {
     public:
-        const Class& GetInstance()
+        static Class& GetInstance()
         {
             static Class instance;
             return instance;
+        }
+        static const Class& GetInstanceConst()
+        {
+            return GetInstance();
         }
     };
 }
