@@ -14,13 +14,15 @@ namespace adm
     {
         static constexpr int Windows = 0;
         static constexpr int Linux = 1;
+
+        static constexpr int Undefined = -1;
     };
 
     #ifdef WIN32
     constexpr int Platform = Platforms::Windows;
-    #endif
-
-    #ifdef __linux__
+    #elif __linux__
     constexpr int Platform = Platforms::Linux;
+    #else
+    static_assert(false, "Unsupported platform");
     #endif
 }
