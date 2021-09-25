@@ -13,7 +13,7 @@ namespace adm
 	public:
 		enum TimeUnit
 		{
-			Seconds, Milliseconds, Microseconds
+			Seconds, Milliseconds, Microseconds, Nanoseconds
 		};
 
 		Timer();
