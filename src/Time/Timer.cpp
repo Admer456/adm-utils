@@ -32,7 +32,7 @@ float Timer::GetElapsed( const TimeUnit& tu ) const
 }
 
 // ============================
-// Timer::GetElapsed
+// Timer::GetElapsedAndReset
 // ============================
 float Timer::GetElapsedAndReset( const TimeUnit& tu )
 {

@@ -7,6 +7,11 @@ namespace adm
 
 	// ============================
 	// Timer
+	// 
+	// A class you can use to measure time:
+	// Timer t;
+	// SomeExpensiveFunction();
+	// float milliseconds = t.GetElapsed();
 	// ============================
 	class Timer final
 	{
