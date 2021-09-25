@@ -96,6 +96,24 @@ std::string Lexer::Next()
 		}
 
 		position++;
+			if ( view[position] == '"' )
+			{
+
+				ToggleQuoteMode();
+				IncrementPosition();
+				continue;
+			}
+
+	// Escape from a quote
+	if ( view[position] == '"' )
+	{
+		if constexpr ( DebugLexer )
+		{
+			printf( "Lexer::Next: found a '\"', toggling quote mode\n" );
+		}
+
+		ToggleQuoteMode();
+		IncrementPosition();
 	}
 
 	return result;
