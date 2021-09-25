@@ -35,6 +35,8 @@ namespace adm
 		bool			IsEndOfLine() const;
 
 		void			NewLine();
+		void			ToggleQuoteMode();
+		void			IncrementPosition();
 
 	private:
 		size_t			position{ 0 }; // position in the line

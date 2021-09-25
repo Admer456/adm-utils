@@ -181,3 +181,16 @@ void Lexer::NewLine()
 
 	position = newPosition + 1;
 }
+
+void Lexer::ToggleQuoteMode()
+{
+	inQuote = !inQuote;
+}
+
+void Lexer::IncrementPosition()
+{
+	if ( !IsEndOfFile() )
+	{
+		position++;
+	}
+}
