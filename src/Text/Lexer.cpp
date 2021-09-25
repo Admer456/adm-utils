@@ -82,20 +82,34 @@ std::string Lexer::Next()
 {
 	std::string result;
 
-	while ( CanAdvance() )
+	do
 	{
-		if ( IsComment() )
+		// Skip any whitespaces etc. after a token
+		while ( !CanAdvance() && !IsEndOfFile() )
 		{
-			NewLine();
-			continue;
+			if ( IsComment() )
+			{
+				NewLine();
+				continue;
+			}
+
+			position++;
 		}
 
-		if ( CanAdd() )
+		// Can't go any further
+		if ( IsEndOfFile() )
 		{
-			result += view[position];
+			return "";
 		}
 
-		position++;
+		while ( CanAdvance() )
+		{
+			if ( IsComment() )
+			{
+				NewLine();
+				continue;
+			}
+
 			if ( view[position] == '"' )
 			{
 
@@ -103,6 +117,15 @@ std::string Lexer::Next()
 				IncrementPosition();
 				continue;
 			}
+
+			if ( CanAdd() )
+			{
+				result += view[position];
+			}
+
+			IncrementPosition();
+		}
+	} while ( result.empty() );
 
 	// Escape from a quote
 	if ( view[position] == '"' )
