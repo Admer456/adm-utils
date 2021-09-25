@@ -19,13 +19,19 @@ namespace adm
 		Lexer( const char* text );
 		Lexer( std::string_view text );
 
+		// Wipes the buffer
 		void			Clear();
+		// Loads the lexer with text
 		void			Load( const char* text );
+		// Loads the lexer with text
 		void			Load( std::string_view text );
 
-		// Gets the next token
+		// Gets the next token and advances
 		std::string		Next();
+		// Compares the next token to expectedToken, optionally
+		// advancing the position in the buffer
 		bool			Expect( const char* expectedToken, bool advance = false );
+		// @returns Whether EOF has been reached or not
 		bool			IsEndOfFile() const;
 
 	private:
@@ -40,7 +46,7 @@ namespace adm
 		void			IncrementPosition();
 
 	private:
-		size_t			position{ 0 }; // position in the line
+		size_t			position{ 0 }; // position in the buffer
 		bool			inQuote{ false };
 
 		std::string		buffer;
