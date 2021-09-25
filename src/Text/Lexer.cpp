@@ -22,10 +22,10 @@ Lexer::Lexer( const Lexer& other )
 Lexer::Lexer( std::fstream& fileStream )
 {
 	std::string line, text;
-	std::istringstream sstream;
+	std::ostringstream sstream;
 	while ( std::getline( fileStream, line ) )
 	{
-		sstream >> line;
+		sstream << line.c_str() << '\n';
 	}
 
 	text = sstream.str();
@@ -35,10 +35,10 @@ Lexer::Lexer( std::fstream& fileStream )
 Lexer::Lexer( std::ifstream& fileStream )
 {
 	std::string line, text;
-	std::istringstream sstream;
+	std::ostringstream sstream;
 	while ( std::getline( fileStream, line ) )
 	{
-		sstream >> line;
+		sstream << line.c_str() << '\n';
 	}
 
 	text = sstream.str();
@@ -70,11 +70,13 @@ void Lexer::Clear()
 void Lexer::Load( const char* text )
 {
 	buffer = text;
+	view = buffer;
 }
 
 void Lexer::Load( std::string_view text )
 {
 	buffer = text;
+	view = buffer;
 }
 
 std::string Lexer::Next()
@@ -128,6 +130,11 @@ bool Lexer::CanAdd() const
 
 bool Lexer::CanAdvance() const
 {
+	if ( IsEndOfFile() )
+	{
+		return false;
+	}
+
 	const char& c = view[position];
 
 	if ( inQuote )
