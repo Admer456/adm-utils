@@ -2,6 +2,9 @@
 #include "Precompiled.hpp"
 using namespace adm;
 
+// ============================
+// Vec3::ctor for C strings
+// ============================
 Vec3::Vec3( const char* string )
 {
 	if ( nullptr == string )
@@ -10,7 +13,21 @@ Vec3::Vec3( const char* string )
 		return;
 	}
 
-	std::sscanf( string, "%f %f %f", &x, &y, &z );
+	//int value = std::sscanf( string, "%f %f %f", &x, &y, &z );
+
+	Lexer lex( string );
+	
+	x = std::stof( lex.Next() );
+	
+	if ( !lex.IsEndOfFile() )
+	{
+		y = std::stof( lex.Next() );
+	}
+
+	if ( !lex.IsEndOfFile() )
+	{
+		z = std::stof( lex.Next() );
+	}
 }
 
 const Vec3 Vec3::Identity 	= Vec3( 1.0f );
