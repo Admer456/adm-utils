@@ -6,6 +6,19 @@ namespace adm
 	constexpr bool DebugLexer = false;
 	constexpr size_t NoPosition = ~0U;
 	
+	// ============================
+	// Lexer
+	// 
+	// A text-parsing utility
+	// Usage:
+	// 
+	// Lexer lex( "buncha text here" );
+	// std::string token;
+	// 
+	// token = lex.Next(); // buncha
+	// token = lex.Next(); // text
+	// token = lex.Next(); // here
+	// ============================
 	class Lexer final
 	{
 	public:
