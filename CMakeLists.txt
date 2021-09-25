@@ -64,7 +64,9 @@ if ( NOT ADMUTIL_NONLIB )
     
     ## Lib output dir
     set_target_properties( AdmUtils PROPERTIES
-    		LIBRARY_OUTPUT_DIRECTORY ${ADMUTIL_ROOT}/libs )
+    		ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${ADMUTIL_ROOT}/libs 
+    		ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${ADMUTIL_ROOT}/libs 
+            )
     
     ## Include directories
     target_include_directories( AdmUtils PRIVATE
@@ -73,12 +75,6 @@ if ( NOT ADMUTIL_NONLIB )
     ## Precompiled headers
     target_precompile_headers( AdmUtils PRIVATE 
             src/Precompiled.hpp )
-
-    ## Output directory
-    install( TARGETS AdmUtils
-            RUNTIME DESTINATION ${ADMUTIL_ROOT}/libs
-            LIBRARY DESTINATION ${ADMUTIL_ROOT}/libs 
-            ARCHIVE DESTINATION ${ADMUTIL_ROOT}/libs )
 else()
     include_directories( ${ADMUTIL_INCLUDE_DIRECTORY} )
 endif()
