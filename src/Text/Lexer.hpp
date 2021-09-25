@@ -3,6 +3,7 @@
 
 namespace adm
 {	
+	constexpr bool DebugLexer = false;
 	constexpr size_t NoPosition = ~0U;
 	
 	class Lexer final

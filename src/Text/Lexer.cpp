@@ -99,6 +99,10 @@ std::string Lexer::Next()
 		// Can't go any further
 		if ( IsEndOfFile() )
 		{
+			if constexpr ( DebugLexer )
+			{
+				printf( "Lexer::Next: EOF\n" );
+			}
 			return "";
 		}
 
@@ -112,6 +116,10 @@ std::string Lexer::Next()
 
 			if ( view[position] == '"' )
 			{
+				if constexpr ( DebugLexer )
+				{
+					printf( "Lexer::Next: found a '\"', toggling quote mode\n" );
+				}
 
 				ToggleQuoteMode();
 				IncrementPosition();
@@ -126,6 +134,11 @@ std::string Lexer::Next()
 			IncrementPosition();
 		}
 	} while ( result.empty() );
+
+	if constexpr ( DebugLexer )
+	{
+		printf( "Lexer::Next: token '%s'\n", result.c_str() );
+	}
 
 	// Escape from a quote
 	if ( view[position] == '"' )
@@ -216,8 +229,18 @@ void Lexer::NewLine()
 	size_t newPosition = view.find( '\n', position+1 );
 	if ( newPosition == std::string::npos )
 	{
+		if constexpr ( DebugLexer )
+		{
+			printf( "Lexer::NewLine: Didn't find a newline...\n" );
+		}
+
 		position = view.size() + 1;
 		return;
+	}
+
+	if constexpr ( DebugLexer )
+	{
+		printf( "Lexer::NewLine: Found a newline, jumping...\n" );
 	}
 
 	position = newPosition + 1;
