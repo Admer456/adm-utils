@@ -3,6 +3,8 @@
 
 namespace adm
 {
+    constexpr size_t FormatBufferSize = 4096U;
+
     // Variadic string formatting
     // Should be threadsafe, so long as each thread uses a different 'slot'
     template<uint32_t slot = 0, bool DebugFormat = false>
@@ -12,7 +14,7 @@ namespace adm
         constexpr uint32_t localSlot = slot;
 
         va_list arguments;
-        static char buffer[2048];
+        static char buffer[FormatBufferSize];
 
         // Format the string
         va_start( arguments, formatString );
@@ -21,7 +23,7 @@ namespace adm
 
         if constexpr ( DebugFormat )
         {
-            snprintf( buffer, 2048, "%s::DBG::slot%u", buffer, localSlot );
+            snprintf( buffer, FormatBufferSize, "%s::DBG::slot%u", buffer, localSlot );
         }
 
         return buffer;
