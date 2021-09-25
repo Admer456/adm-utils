@@ -75,8 +75,7 @@ void Lexer::Load( const char* text )
 
 void Lexer::Load( std::string_view text )
 {
-	buffer = text;
-	view = buffer;
+	Load( text.data() );
 }
 
 std::string Lexer::Next()
@@ -139,10 +138,10 @@ bool Lexer::CanAdvance() const
 
 	if ( inQuote )
 	{
-		return !IsEndOfFile();
+		return !IsEndOfFile() && c != '"';
 	}
 
-	return c != ' ' && c != '\t' && c != '\0' && !IsEndOfLine() && !IsEndOfFile();
+	return c != ' ' && c != '\t' && c != '\0' && !IsEndOfLine();
 }
 
 bool Lexer::IsComment() const
@@ -168,7 +167,7 @@ bool Lexer::IsComment() const
 
 bool Lexer::IsEndOfLine() const
 {
-	return view[position] == '\n';
+	return view[position] == '\n' || view[position] == '\r';
 }
 
 void Lexer::NewLine()
