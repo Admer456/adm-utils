@@ -32,6 +32,7 @@
 #include "Text/Lexer.hpp" // Text parsing
 
 // Game maths
+#include "Maths/Lerp.hpp"
 #include "Maths/Vec3.hpp" // 3D vector
 
 // Containers and utilities
