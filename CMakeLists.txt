@@ -32,6 +32,7 @@ set( ADMUTIL_SOURCES
 		src/Precompiled.hpp
         src/Containers/Dictionary.hpp
         src/Containers/Dictionary.cpp
+        src/Containers/InstanceChain.hpp
         src/Containers/Singleton.hpp 
 		src/Maths/Lerp.hpp 
 		src/Maths/Vec3.hpp 
