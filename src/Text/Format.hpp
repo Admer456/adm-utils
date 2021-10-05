@@ -4,6 +4,7 @@
 namespace adm
 {
     constexpr size_t FormatBufferSize = 4096U;
+    constexpr size_t FormatBufferIndices = 4U;
 
     // Variadic string formatting
     // Should be threadsafe, so long as each thread uses a different 'slot'
@@ -13,19 +14,23 @@ namespace adm
         // Hoping the compiler won't optimise this away
         constexpr uint32_t localSlot = slot;
 
+        static char buffer[FormatBufferIndices][FormatBufferSize];
+        static int bufferIndex = 0; // for nested formattings - it happens sometimes
+        static char* bufferPointer = nullptr;
         va_list arguments;
-        static char buffer[FormatBufferSize];
 
+        bufferPointer = buffer[bufferIndex++ % FormatBufferIndices];
+        
         // Format the string
         va_start( arguments, formatString );
-        vsprintf( buffer, formatString, arguments );
+        vsprintf( bufferPointer, formatString, arguments );
         va_end( arguments );
 
         if constexpr ( DebugFormat )
         {
-            snprintf( buffer, FormatBufferSize, "%s::DBG::slot%u", buffer, localSlot );
+            snprintf( bufferPointer, FormatBufferSize, "%s::DBG::slot%u", bufferPointer, localSlot );
         }
 
-        return buffer;
+        return bufferPointer;
     }
 }
