@@ -189,7 +189,7 @@ std::string Lexer::Next()
 	}
 
 	// Escape from a quote
-	if ( view[position] == '"' )
+	if ( inQuote && view[position] == '"' )
 	{
 		if constexpr ( DebugLexer )
 		{
