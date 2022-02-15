@@ -53,12 +53,6 @@ if ( NOT ADMUTIL_NONLIB )
     source_group( TREE ${ADMUTIL_ROOT} FILES ${ADMUTIL_SOURCES} )
 endif()
 
-## UNICODE, UNICODE, UNICODE
-if ( WIN32 )
-    add_compile_definitions( UNICODE )
-    add_compile_definitions( _UNICODE )
-endif()
-
 if ( NOT ADMUTIL_NONLIB )
     ## AdmUtils.lib
     add_library( AdmUtils 
