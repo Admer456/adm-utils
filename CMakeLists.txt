@@ -45,7 +45,8 @@ set( ADMUTIL_SOURCES
 
 ## User of this library: this is what you're interested in
 set ( ADMUTIL_INCLUDE_DIRECTORY
-        ${ADMUTIL_ROOT}/src )
+        ${ADMUTIL_ROOT}/src 
+        CACHE INTERNAL "" )
 
 ## If someone's embedding this, let them group the sources 
 ## as they wish
@@ -66,7 +67,7 @@ if ( NOT ADMUTIL_NONLIB )
     
     ## Include directories
     target_include_directories( AdmUtils PRIVATE
-    		${ADMUTIL_INCLUDE_DIRECTORY} )
+            ${ADMUTIL_INCLUDE_DIRECTORY} )
 
     ## Precompiled headers
     target_precompile_headers( AdmUtils PRIVATE 
