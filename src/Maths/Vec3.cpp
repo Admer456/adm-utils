@@ -9,11 +9,9 @@ Vec3::Vec3( const char* string )
 {
 	if ( nullptr == string )
 	{
-		*this = Vec3::Zero;
+		// Members are already initialised at this point
 		return;
 	}
-
-	//int value = std::sscanf( string, "%f %f %f", &x, &y, &z );
 
 	Lexer lex( string );
 	

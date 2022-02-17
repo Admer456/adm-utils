@@ -9,15 +9,15 @@ namespace adm
 	class Vec3 final
 	{
 	public: // Construction
-		Vec3() = default;
-		explicit Vec3( float XYZ )			{ x = y = z = XYZ; }
-		Vec3( float X, float Y, float Z )	{ x = X; y = Y; z = Z; }
-		Vec3( Vec3&& v ) noexcept			{ x = v.x; y = v.y; z = v.z; }
-		Vec3( const Vec3& v )    			{ x = v.x; y = v.y; z = v.z; }
+		constexpr Vec3() = default;
+		constexpr explicit Vec3( float XYZ ) : x(XYZ), y(XYZ), z(XYZ) {}
+		constexpr Vec3( float X, float Y, float Z ) : x(X), y(Y), z(Z) {}
+		constexpr Vec3( Vec3&& v ) noexcept = default;
+		constexpr Vec3( const Vec3& v ) = default;
 		Vec3( const char* string );
 
 		// Generic 3-float array support
-		Vec3( const float* vec ) 			{ x = vec[0]; y = vec[1]; z = vec[2]; }
+		constexpr Vec3( const float* vec ) : x(vec[0]), y(vec[1]), z(vec[2]) {}
 
 	public: // Methods
 		// 3D length of this vector
@@ -45,7 +45,9 @@ namespace adm
 				return Zero;
 			}
 
-			return *this /= length;
+			*this /= length;
+
+			return *this;
 		}
 		// Returns a normalized copy of this vector
 		inline Vec3 		Normalized() const
@@ -71,15 +73,15 @@ namespace adm
 		{
 			if ( grid == 1 )
 			{
-				x = static_cast<int>(x);
-				y = static_cast<int>(y);
-				z = static_cast<int>(z);
+				x = int(x);
+				y = int(y);
+				z = int(z);
 				return *this;
 			}
 
-			x = static_cast<int>(x / grid) * grid;
-			y = static_cast<int>(y / grid) * grid;
-			z = static_cast<int>(z / grid) * grid;
+			x = int(x / grid) * grid;
+			y = int(y / grid) * grid;
+			z = int(z / grid) * grid;
 			return *this;
 		}
 		// Returns a snapped copy of this vector
@@ -113,12 +115,12 @@ namespace adm
 		}
 
 	public: // Constants
-		static const Vec3 	Identity;
-		static const Vec3 	Zero;
-
-		static const Vec3 	Forward;
-		static const Vec3 	Right;
-		static const Vec3 	Up;
+		static const Vec3 Identity;
+		static const Vec3 Zero;
+						  
+		static const Vec3 Forward;
+		static const Vec3 Right;
+		static const Vec3 Up;
 
 	public: // Operators
 		// Vec3 + Vec3 
@@ -210,7 +212,7 @@ namespace adm
 			y /= rhs;
 			z /= rhs;
 
-			return * this;
+			return *this;
 		}
 		// Generic float array support, in case someone uses this library with Quake or Half-Life
 		inline operator		float* ()
@@ -240,11 +242,18 @@ inline adm::Vec3 operator* ( const float& lhs, const adm::Vec3& rhs )
 
 namespace std
 {
-	// Extending le standard librarieh to support Vec3
+	// Extending le standard bibliotheque to support Vec3
 	inline std::string to_string( adm::Vec3 val )
 	{
+		// TODO: use fmtlib, sprintf is like 20x slower
 		char buffer[128]; // God forbid you put such a large number to overflow this...
-		sprintf( buffer, "%f %f %f", val.x, val.y, val.z );
+		snprintf( buffer, 128, "%f %f %f", val.x, val.y, val.z );
 		return std::string( buffer );
 	}
+}
+
+inline std::ostream& operator << ( std::ostream& os, const adm::Vec3& vec )
+{
+	os << vec.x << " " << vec.y << " " << vec.z;
+	return os;
 }
