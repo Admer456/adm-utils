@@ -42,3 +42,9 @@
 
 // Time utilities
 #include "Time/Timer.hpp" // Scope-based timer
+
+#ifdef WIN32
+#define ADM_EXPORT __declspec(dllexport)
+#else
+#error "Don't know how to do this one yet"
+#endif
