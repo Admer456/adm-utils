@@ -34,6 +34,7 @@
 // Game maths
 #include "Maths/Lerp.hpp"
 #include "Maths/Vec3.hpp" // 3D vector
+#include "Maths/Plane.hpp"
 
 // Containers and utilities
 #include "Containers/Singleton.hpp" // Singleton wrapper

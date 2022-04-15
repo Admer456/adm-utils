@@ -159,6 +159,11 @@ namespace adm
 
 			return *this;
 		}
+		// -Vec3
+		inline Vec3 operator- () const
+		{
+			return *this * -1.0f;
+		}
 		// Vec3 == Vec3
 		inline bool 		operator== ( const Vec3& rhs ) const
 		{

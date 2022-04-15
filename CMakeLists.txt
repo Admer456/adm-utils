@@ -37,6 +37,8 @@ set( ADMUTIL_SOURCES
 		src/Maths/Lerp.hpp 
 		src/Maths/Vec3.hpp 
 		src/Maths/Vec3.cpp 
+		src/Maths/Plane.hpp 
+		src/Maths/Plane.cpp 
         src/Text/Format.hpp        
         src/Text/Lexer.hpp        
         src/Text/Lexer.cpp 
