@@ -148,6 +148,14 @@ std::string Lexer::Next()
 			return "";
 		}
 
+		// TODO: insert delimiters here
+		// if ( IsDelimiter() )
+		// {
+		//    result = view[position];
+		//    position+;
+		//    break;
+		// }
+
 		while ( CanAdvance() )
 		{
 			// We only support single-line comments, so
