@@ -39,10 +39,10 @@ set( ADMUTIL_SOURCES
 		src/Maths/Vec3.cpp 
 		src/Maths/Plane.hpp 
 		src/Maths/Plane.cpp 
-		src/Text/Format.hpp        
-		src/Text/Lexer.hpp        
+		src/Text/Format.hpp 
+		src/Text/Lexer.hpp 
 		src/Text/Lexer.cpp 
-		src/Time/Timer.hpp
+		src/Time/Timer.hpp 
 		src/Time/Timer.cpp )
 
 ## User of this library: this is what you're interested in
