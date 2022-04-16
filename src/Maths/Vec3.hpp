@@ -255,6 +255,15 @@ namespace std
 		snprintf( buffer, 128, "%f %f %f", val.x, val.y, val.z );
 		return std::string( buffer );
 	}
+
+	inline adm::Vec3 fabs( const adm::Vec3& v )
+	{
+		return adm::Vec3{
+			fabs( v.x ),
+			fabs( v.y ),
+			fabs( v.z )
+		};
+	}
 }
 
 inline std::ostream& operator << ( std::ostream& os, const adm::Vec3& vec )
