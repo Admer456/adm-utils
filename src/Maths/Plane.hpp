@@ -12,7 +12,7 @@ namespace adm
 	class Plane final
 	{
 	public: // Construction
-		constexpr Plane( float A, float B, float C, float D )
+		constexpr Plane( float A = 0.0f, float B = 0.0f, float C = 0.0f, float D = 0.0f )
 			: a( A ), b( B ), c( C ), d( D )
 		{
 
@@ -95,6 +95,25 @@ namespace adm
 		inline Vec3 Project( const Vec3& p ) const
 		{
 			return p - ((p - GetPointOnPlane()) * GetNormal()) * GetNormal();
+		}
+
+		// Gets the closest axis to the normal of this plane
+		// @returns Vec3::Forward/-Right/Up depending on the normal
+		inline Vec3 GetClosestAxisToNormal() const
+		{
+			const Vec3 normal = std::fabs( GetNormal() );
+
+			if ( normal.x >= normal.y && normal.x >= normal.z )
+			{
+				return Vec3::Forward;
+			}
+
+			if ( normal.y >= normal.z )
+			{
+				return -Vec3::Right;
+			}
+
+			return Vec3::Up;
 		}
 
 		// Calculate a line intersection
