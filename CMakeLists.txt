@@ -39,6 +39,8 @@ set( ADMUTIL_SOURCES
 		src/Maths/Vec3.cpp 
 		src/Maths/Plane.hpp 
 		src/Maths/Plane.cpp 
+		src/Maths/Polygon.hpp 
+		src/Maths/Polygon.cpp 
 		src/Text/Format.hpp 
 		src/Text/Lexer.hpp 
 		src/Text/Lexer.cpp 

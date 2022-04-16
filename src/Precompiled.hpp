@@ -5,6 +5,7 @@
 
 // Containers
 #include <array>
+#include <optional>
 #include <unordered_map>
 // Strings
 #include <string>
@@ -35,6 +36,7 @@
 #include "Maths/Lerp.hpp"
 #include "Maths/Vec3.hpp" // 3D vector
 #include "Maths/Plane.hpp"
+#include "Maths/Polygon.hpp"
 
 // Containers and utilities
 #include "Containers/Singleton.hpp" // Singleton wrapper
