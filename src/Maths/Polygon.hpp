@@ -19,7 +19,7 @@ namespace adm
 		Polygon( std::vector<Vec3>& verts ) : vertices( verts ) {}
 		
 		// Construct a very large polygon from a plane
-		Polygon( const Plane& plane, float radius = 1'000'000'000.0f );
+		Polygon( const Plane& plane, float radius = 1'000'000.0f );
 		//  This would be the first time I ever use this ^ feature
 		
 	public: // Getters & setters

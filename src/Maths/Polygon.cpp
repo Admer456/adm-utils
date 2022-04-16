@@ -44,7 +44,7 @@ Polygon::Polygon( const Plane& plane, float radius )
 // ============================
 PolygonSplitResult Polygon::Split( const Plane& plane ) const
 {
-	constexpr float Epsilon = 0.00001f;
+	constexpr float Epsilon = 0.0001f;
 	PolygonSplitResult result;
 
 	// NGL this would be more elegant if std::vector had something like
@@ -92,9 +92,9 @@ PolygonSplitResult Polygon::Split( const Plane& plane ) const
 
 		for ( size_t i = 0U; i < vertices.size(); i++ )
 		{
-			const int j = (i + 1) & vertices.size();
+			const int j = (i + 1) % vertices.size();
 
-			const Vec3& s = vertices[i], e = vertices[i];
+			const Vec3& s = vertices[i], e = vertices[j];
 			const float& sd = distances[i], ed = distances[j];
 
 			if ( sd <= 0.0f )

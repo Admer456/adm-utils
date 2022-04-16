@@ -128,8 +128,8 @@ namespace adm
 		{
 			return Vec3{
 				x + rhs.x,
-				x + rhs.y,
-				x + rhs.z
+				y + rhs.y,
+				z + rhs.z
 			};
 		}
 		// Vec3 - Vec3
