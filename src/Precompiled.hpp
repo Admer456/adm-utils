@@ -66,7 +66,7 @@ namespace adm
 
 // Containers and utilities
 #include "Containers/Singleton.hpp" // Singleton wrapper
-#include "Containers/InstanceChain.hpp" // Class-wide static linked list
+#include "Containers/Chain.hpp" // Class-wide static linked list
 #include "Containers/Dictionary.hpp" // Dictionary/KV pairs
 
 // Time utilities
