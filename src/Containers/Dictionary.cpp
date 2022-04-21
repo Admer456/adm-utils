@@ -22,11 +22,11 @@ Dictionary::~Dictionary()
 	Clear();
 }
 
-std::string Dictionary::GetString( const char* keyname, const char* default ) const
+std::string Dictionary::GetString( const char* keyname, const char* defaultValue ) const
 {
 	if ( !KeyExists( keyname ) )
 	{
-		return default;
+		return defaultValue;
 	}
 
 	return pairs.at( keyname );
@@ -48,11 +48,11 @@ void Dictionary::SetString( const char* keyname, std::string_view value )
 	pairs[keyname] = value;
 }
 
-const char* Dictionary::GetCString( const char* keyname, const char* default ) const
+const char* Dictionary::GetCString( const char* keyname, const char* defaultValue ) const
 {
 	if ( !KeyExists( keyname ) )
 	{
-		return default;
+		return defaultValue;
 	}
 
 	return pairs.at( keyname ).c_str();
@@ -74,11 +74,11 @@ void Dictionary::SetCString( const char* keyname, const char* value )
 	pairs[keyname] = value;
 }
 
-float Dictionary::GetFloat( const char* keyname, const float& default ) const
+float Dictionary::GetFloat( const char* keyname, const float& defaultValue ) const
 {
 	if ( !KeyExists( keyname ) )
 	{
-		return default;
+		return defaultValue;
 	}
 
 	return std::atof( GetStringDirect( keyname ) );
@@ -100,11 +100,11 @@ void Dictionary::SetFloat( const char* keyname, float value )
 	pairs[keyname] = std::to_string( value );
 }
 
-int Dictionary::GetInteger( const char* keyname, const int& default ) const
+int Dictionary::GetInteger( const char* keyname, const int& defaultValue ) const
 {
 	if ( !KeyExists( keyname ) )
 	{
-		return default;
+		return defaultValue;
 	}
 
 	return std::atoi( GetStringDirect( keyname ) );
@@ -126,11 +126,11 @@ void Dictionary::SetInteger( const char* keyname, int value )
 	SetString( keyname, std::to_string( value ) );
 }
 
-bool Dictionary::GetBool( const char* keyname, const bool& default ) const
+bool Dictionary::GetBool( const char* keyname, const bool& defaultValue ) const
 {
 	if ( !KeyExists( keyname ) )
 	{
-		return default;
+		return defaultValue;
 	}
 
 	return std::atoi( GetStringDirect( keyname ) ) == 0;
@@ -152,11 +152,11 @@ void Dictionary::SetBool( const char* keyname, bool value )
 	SetCString( keyname, value ? "1" : "0" );
 }
 
-Vec3 Dictionary::GetVec3( const char* keyname, const Vec3& default ) const
+Vec3 Dictionary::GetVec3( const char* keyname, const Vec3& defaultValue ) const
 {
 	if ( !KeyExists( keyname ) )
 	{
-		return default;
+		return defaultValue;
 	}
 
 	return Vec3( GetStringDirect( keyname ) );

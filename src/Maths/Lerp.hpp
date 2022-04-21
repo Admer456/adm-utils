@@ -25,7 +25,7 @@ namespace adm
     // @param rate: How fast to transition
     inline float Fade( const float& source, const float& target, const float& rate, const float& deltaTime )
     {
-        return Lerp( source, target, std::powf( rate, deltaTime ) );
+        return Lerp( source, target, std::pow( rate, deltaTime ) );
     }
 
     // Normalised non-linear transforms
