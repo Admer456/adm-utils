@@ -21,16 +21,25 @@ namespace adm
 	// ============================
 	class Lexer final
 	{
+	public: // Delimiter presets
+		// If you're parsing a language with expressions
+		static constexpr const char* DelimitersFull = "()[]{}.:,;=+-*/&@'?";
+		// If you're parsing simple text data
+		static constexpr const char* DelimitersSimple = "()[]{}:,;";
+	
+		static constexpr const char* DelimitersDefault = DelimitersSimple;
+
 	public:
 		Lexer();
 		Lexer( Lexer&& other ) noexcept;
 		Lexer( const Lexer& other );
+		// From files
 		Lexer( std::fstream& fileStream );
 		Lexer( std::ifstream& fileStream );
-		~Lexer();
-
+		// From raw text
 		Lexer( const char* text );
 		Lexer( std::string_view text );
+		~Lexer();
 
 		// Wipes the buffer
 		void			Clear();
@@ -38,6 +47,9 @@ namespace adm
 		void			Load( const char* text );
 		// Loads the lexer with text
 		void			Load( std::string_view text );
+		// Delimiters are individual characters that can separate tokens,
+		// they are tokens themselves. Default is Lexer::DelimitersSimple
+		void			SetDelimiters( const char* delimiters );
 
 		// Gets the next token and advances
 		std::string		Next();
@@ -52,11 +64,12 @@ namespace adm
 		bool			CanAdvance() const;
 		
 		bool			IsComment() const;
-		bool			IsEndOfLine() const;
+		inline bool		IsEndOfLine() const;
+		inline bool		IsDelimiter() const;
 
 		void			NewLine();
-		void			ToggleQuoteMode();
-		void			IncrementPosition();
+		inline void		ToggleQuoteMode();
+		inline void		IncrementPosition();
 
 	private:
 		size_t			position{ 0 }; // position in the buffer
@@ -64,5 +77,6 @@ namespace adm
 
 		std::string		buffer;
 		std::string_view view;
+		std::string		delimiterString{ DelimitersDefault };
 	};
 }
