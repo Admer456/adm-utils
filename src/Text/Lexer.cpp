@@ -44,7 +44,7 @@ Lexer::Lexer( std::fstream& fileStream )
 	// as far as I'm aware
 	// It'd be nice if I could just grab the sstream buffer directly
 	// and pass it as a const char* to Load
-	std::string line, text;
+	String line, text;
 	std::ostringstream sstream;
 	while ( std::getline( fileStream, line ) )
 	{
@@ -60,7 +60,7 @@ Lexer::Lexer( std::fstream& fileStream )
 // ============================
 Lexer::Lexer( std::ifstream& fileStream )
 {
-	std::string line, text;
+	String line, text;
 	std::ostringstream sstream;
 	while ( std::getline( fileStream, line ) )
 	{
@@ -90,7 +90,7 @@ Lexer::Lexer( const char* text )
 // ============================
 // Lexer::ctor for string_view
 // ============================
-Lexer::Lexer( std::string_view text )
+Lexer::Lexer( StringView text )
 {
 	Load( text );
 }
@@ -118,7 +118,7 @@ void Lexer::Load( const char* text )
 // ============================
 // Lexer::Load
 // ============================
-void Lexer::Load( std::string_view text )
+void Lexer::Load( StringView text )
 {
 	Load( text.data() );
 }
@@ -139,9 +139,9 @@ void Lexer::SetDelimiters( const char* delimiters )
 // ============================
 // Lexer::Next
 // ============================
-std::string Lexer::Next()
+String Lexer::Next()
 {
-	std::string result;
+	String result;
 
 	// This do-while loop is responsible for skipping "empty" lines
 	// and advancing to the next ones, until we get a usable token
@@ -239,7 +239,7 @@ bool Lexer::Expect( const char* expectedToken, bool advance )
 {
 	size_t oldPosition = position;
 	
-	std::string nextToken = Next();
+	String nextToken = Next();
 	
 	if ( !advance )
 	{
@@ -335,7 +335,7 @@ inline bool Lexer::IsEndOfLine() const
 // ============================
 inline bool Lexer::IsDelimiter() const
 {
-	return delimiterString.find( view[position] ) != std::string::npos;
+	return delimiterString.find( view[position] ) != String::npos;
 }
 
 // ============================
@@ -347,7 +347,7 @@ inline bool Lexer::IsDelimiter() const
 void Lexer::NewLine()
 {
 	size_t newPosition = view.find( '\n', position+1 );
-	if ( newPosition == std::string::npos )
+	if ( newPosition == String::npos )
 	{
 		if constexpr ( DebugLexer )
 		{

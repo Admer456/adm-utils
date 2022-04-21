@@ -16,7 +16,7 @@ namespace adm
 		~Polygon() = default;
 
 		// Construct a polygon from existing vertices
-		Polygon( std::vector<Vec3>& verts ) : vertices( verts ) {}
+		Polygon( Vector<Vec3>& verts ) : vertices( verts ) {}
 		
 		// Construct a very large polygon from a plane
 		Polygon( const Plane& plane, float radius = 1'000'000.0f );
@@ -72,7 +72,7 @@ namespace adm
 		struct PolygonSplitResult Split( const Plane& plane ) const;
 
 	public: // Members
-		std::vector<Vec3> vertices;
+		Vector<Vec3> vertices;
 	};
 
 	// Helper structure to store polygon splitting data
@@ -80,9 +80,9 @@ namespace adm
 	struct PolygonSplitResult
 	{
 		bool didIntersect{ false };
-		std::optional<Polygon> front;
-		std::optional<Polygon> back;
-		std::optional<Polygon> coplanarFront;
-		std::optional<Polygon> coplanarBack;
+		Optional<Polygon> front;
+		Optional<Polygon> back;
+		Optional<Polygon> coplanarFront;
+		Optional<Polygon> coplanarBack;
 	};
 }

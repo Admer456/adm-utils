@@ -7,11 +7,12 @@
 #include <array>
 #include <optional>
 #include <unordered_map>
+#include <vector>
+#include <list>
 // Strings
 #include <string>
 #include <string_view>
 #include <sstream>
-#include <vector>
 // Maths
 #include <cmath>
 #include <algorithm>
@@ -23,6 +24,31 @@
 #include <type_traits>
 #include <stdarg.h>
 #include <thread>
+
+// Some type aliases for stylistic consistency
+namespace adm
+{
+	using String = std::string;
+	using StringView = std::string_view;
+
+	template<class T>
+	using LinkedList = std::list<T>;
+
+	template<class T, size_t N>
+	using Array = std::array<T, N>;
+
+	// This is a dynamic array, NOT a 2D/3D/4D vector!!!
+	template<class T>
+	using Vector = std::vector<T>;
+
+	// This is actually an unordered map, but I've never 
+	// really needed to use std::map
+	template<class TIndex, class TValue>
+	using Map = std::unordered_map<TIndex, TValue>;
+
+	template<class T>
+	using Optional = std::optional<T>;
+}
 
 // The most basic thing of all
 // Defines some compile-time constants like adm::Debug

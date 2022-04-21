@@ -38,7 +38,7 @@ namespace adm
 		Lexer( std::ifstream& fileStream );
 		// From raw text
 		Lexer( const char* text );
-		Lexer( std::string_view text );
+		Lexer( StringView text );
 		~Lexer();
 
 		// Wipes the buffer
@@ -46,7 +46,7 @@ namespace adm
 		// Loads the lexer with text
 		void			Load( const char* text );
 		// Loads the lexer with text
-		void			Load( std::string_view text );
+		void			Load( StringView text );
 		// Delimiters are individual characters that can separate tokens,
 		// they are tokens themselves. Default is Lexer::DelimitersSimple
 		void			SetDelimiters( const char* delimiters );
@@ -75,8 +75,8 @@ namespace adm
 		size_t			position{ 0 }; // position in the buffer
 		bool			inQuote{ false };
 
-		std::string		buffer;
-		std::string_view view;
-		std::string		delimiterString{ DelimitersDefault };
+		String			buffer;
+		StringView		view;
+		String			delimiterString{ DelimitersDefault };
 	};
 }
