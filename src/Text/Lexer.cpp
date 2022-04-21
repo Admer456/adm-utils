@@ -15,8 +15,12 @@ Lexer::Lexer()
 // ============================
 Lexer::Lexer( Lexer&& other ) noexcept
 {
-	Clear();
-	Load( other.buffer );
+	position = other.position;
+	inQuote = other.inQuote;
+
+	buffer = std::move( other.buffer );
+	delimiterString = std::move( other.delimiterString );
+	view = buffer;
 }
 
 // ============================
@@ -24,8 +28,11 @@ Lexer::Lexer( Lexer&& other ) noexcept
 // ============================
 Lexer::Lexer( const Lexer& other )
 {
-	Clear();
+	position = other.position;
+	inQuote = other.inQuote;
+
 	Load( other.buffer );
+	delimiterString = other.delimiterString;
 }
 
 // ============================
@@ -96,6 +103,7 @@ void Lexer::Clear()
 	position = 0;
 	
 	buffer.clear();
+	delimiterString.clear();
 }
 
 // ============================
@@ -113,6 +121,19 @@ void Lexer::Load( const char* text )
 void Lexer::Load( std::string_view text )
 {
 	Load( text.data() );
+}
+
+// ============================
+// Lexer::SetDelimiters
+// ============================
+void Lexer::SetDelimiters( const char* delimiters )
+{
+	if ( nullptr == delimiters )
+	{
+		delimiters = "";
+	}
+
+	delimiterString = delimiters;
 }
 
 // ============================
@@ -148,13 +169,13 @@ std::string Lexer::Next()
 			return "";
 		}
 
-		// TODO: insert delimiters here
-		// if ( IsDelimiter() )
-		// {
-		//    result = view[position];
-		//    position+;
-		//    break;
-		// }
+		// Check for delimiters
+		if ( IsDelimiter() )
+		{
+		   result = view[position];
+		   IncrementPosition();
+		   break;
+		}
 
 		while ( CanAdvance() )
 		{
@@ -304,9 +325,17 @@ bool Lexer::IsComment() const
 // ============================
 // Lexer::IsEndOfLine
 // ============================
-bool Lexer::IsEndOfLine() const
+inline bool Lexer::IsEndOfLine() const
 {
 	return view[position] == '\n' || view[position] == '\r';
+}
+
+// ============================
+// Lexer::IsDelimiter
+// ============================
+inline bool Lexer::IsDelimiter() const
+{
+	return delimiterString.find( view[position] ) != std::string::npos;
 }
 
 // ============================
@@ -343,7 +372,7 @@ void Lexer::NewLine()
 // When entering or exiting
 // a quote, this is called
 // ============================
-void Lexer::ToggleQuoteMode()
+inline void Lexer::ToggleQuoteMode()
 {
 	inQuote = !inQuote;
 }
@@ -354,7 +383,7 @@ void Lexer::ToggleQuoteMode()
 // Safely increments the position
 // in the text buffer
 // ============================
-void Lexer::IncrementPosition()
+inline void Lexer::IncrementPosition()
 {
 	if ( !IsEndOfFile() )
 	{
