@@ -68,7 +68,7 @@ namespace adm
 		// Clears all keyvalue pairs
 		void		Clear();
 
-		std::string_view operator[] ( const char* keyname )
+		StringView operator[] ( const char* keyname )
 		{
 			return pairs[keyname];
 		}
@@ -79,6 +79,6 @@ namespace adm
 			return pairs.at( keyname ).c_str();
 		}
 
-		std::unordered_map<std::string, std::string> pairs;
+		Map<String, String> pairs;
 };
 }

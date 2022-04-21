@@ -49,7 +49,7 @@ PolygonSplitResult Polygon::Split( const Plane& plane ) const
 
 	// NGL this would be more elegant if std::vector had something like
 	// List.Select in C#, probably gonna write something like that eventually
-	std::vector<float> distances;
+	Vector<float> distances;
 	distances.reserve( vertices.size() );
 	for ( const auto& v : vertices )
 	{
@@ -88,7 +88,7 @@ PolygonSplitResult Polygon::Split( const Plane& plane ) const
 	// There has been an intersection, calculate back'n'front polygons
 	else
 	{
-		std::vector<Vec3> backVertices, frontVertices;
+		Vector<Vec3> backVertices, frontVertices;
 
 		for ( size_t i = 0U; i < vertices.size(); i++ )
 		{
