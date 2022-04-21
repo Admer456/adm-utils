@@ -14,9 +14,10 @@ namespace adm
             static Class instance;
             return instance;
         }
-        static const Class& GetInstanceConst()
+
+        static Class* GetInstancePtr()
         {
-            return GetInstance();
+            return &GetInstance();
         }
     };
 }
