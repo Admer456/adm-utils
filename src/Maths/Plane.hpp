@@ -80,7 +80,7 @@ namespace adm
 		// Is point p on the plane?
 		// @returns -1 if p is under the plane, 1 if p is above the plane, 
 		// 0 if p is on the plane
-		inline int OnPlane( const Vec3& p, const float& epsilon = 0.0001f ) const
+		inline int OnPlane( const Vec3& p, const float& epsilon = FLT_EPSILON ) const
 		{
 			const float evaluation = EvalAtPoint( p );
 			if ( std::fabs( evaluation ) < epsilon )
@@ -125,7 +125,7 @@ namespace adm
 			const float denominator = -normal * direction;
 			const float numerator = normal * (start - normal * GetDistanceFromOrigin());
 
-			if ( std::fabs( denominator ) < 0.0001f || (!ignoreDirection && denominator < 0.0f) )
+			if ( std::fabs( denominator ) < FLT_EPSILON || (!ignoreDirection && denominator < 0.0f) )
 			{
 				return std::make_pair( false, Vec3::Zero );
 			}
