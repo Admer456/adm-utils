@@ -6,7 +6,7 @@ namespace adm
     // Wrapper for singleton classes
     // Requires a default constructor
     template<typename Class>
-    class Singleton final
+    class Singleton
     {
     public:
         static Class& GetInstance()
