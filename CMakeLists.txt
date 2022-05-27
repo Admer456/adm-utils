@@ -64,11 +64,9 @@ if ( NOT ADMUTIL_NONLIB )
 			${ADMUTIL_SOURCES} )
 	
 	## Lib output dir
-	set_target_properties( AdmUtils PROPERTIES
-			ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${ADMUTIL_ROOT}/libs 
-			ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${ADMUTIL_ROOT}/libs 
-			)
-	
+	install( TARGETS AdmUtils
+		ARCHIVE DESTINATION ${ADMUTIL_ROOT}/lib )
+
 	## Include directories
 	target_include_directories( AdmUtils PRIVATE
 			${ADMUTIL_INCLUDE_DIRECTORY} )
