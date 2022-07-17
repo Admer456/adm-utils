@@ -24,6 +24,7 @@
 #include <type_traits>
 #include <stdarg.h>
 #include <thread>
+#include <functional>
 
 // Some type aliases for stylistic consistency
 namespace adm
@@ -71,6 +72,9 @@ namespace adm
 
 // Time utilities
 #include "Time/Timer.hpp" // Scope-based timer
+
+// System-interfacing stuff
+#include "System/Library.hpp"
 
 // Visual Studio 2017 15.3 supports C++17 AFAIK
 #if defined(_MSC_VER) && _MSC_VER > 1911
