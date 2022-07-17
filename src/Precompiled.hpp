@@ -25,6 +25,7 @@
 #include <stdarg.h>
 #include <thread>
 #include <functional>
+#include <memory>
 
 // Some type aliases for stylistic consistency
 namespace adm
@@ -49,6 +50,12 @@ namespace adm
 
 	template<class T>
 	using Optional = std::optional<T>;
+
+	template<class T>
+	using UniquePtr = std::unique_ptr<T>;
+
+	template<class T>
+	using SharedPtr = std::shared_ptr<T>;
 }
 
 // The most basic thing of all
@@ -88,3 +95,5 @@ namespace adm
 #else
 #error "Compiler not supported"
 #endif
+
+#define ADM_API extern "C" ADM_EXPORT
