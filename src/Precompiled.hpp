@@ -79,7 +79,7 @@ namespace adm
 // GCC 5 onwards supports C++17
 #elif __GNUC__ >= 5 || defined(__clang__)
 // https://gcc.gnu.org/wiki/Visibility
-#define ADM_EXPORT __attribute__ ((visibility ("default")))
+#define ADM_EXPORT __attribute__((visibility("default")))
 
 #else
 #error "Compiler not supported"

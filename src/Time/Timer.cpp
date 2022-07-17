@@ -7,7 +7,7 @@ using namespace adm;
 // ============================
 Timer::Timer()
 {
-    Reset();
+	Reset();
 }
 
 // ============================
@@ -15,20 +15,20 @@ Timer::Timer()
 // ============================
 float Timer::GetElapsed( const TimeUnit& tu ) const
 {
-    float elapsed = 0.0f;
+	float elapsed = 0.0f;
 
-    const auto now = chrono::system_clock::now();
-    const auto nanos = chrono::duration_cast<chrono::nanoseconds>(now - start).count();
-    
-    switch ( tu )
-    {
-    case Timer::Seconds:      elapsed = nanos / 1000000000.0f; break;
-    case Timer::Milliseconds: elapsed = nanos / 1000000.0f; break;
-    case Timer::Microseconds: elapsed = nanos / 1000.0f; break;
-    case Timer::Nanoseconds:  elapsed = nanos; break;
-    }
+	const auto now = chrono::system_clock::now();
+	const auto nanos = chrono::duration_cast<chrono::nanoseconds>(now - start).count();
 
-    return elapsed;
+	switch ( tu )
+	{
+	case Timer::Seconds:      elapsed = nanos / 1000000000.0f; break;
+	case Timer::Milliseconds: elapsed = nanos / 1000000.0f; break;
+	case Timer::Microseconds: elapsed = nanos / 1000.0f; break;
+	case Timer::Nanoseconds:  elapsed = nanos; break;
+	}
+
+	return elapsed;
 }
 
 // ============================
@@ -36,11 +36,11 @@ float Timer::GetElapsed( const TimeUnit& tu ) const
 // ============================
 float Timer::GetElapsedAndReset( const TimeUnit& tu )
 {
-    float elapsed = GetElapsed( tu );
+	float elapsed = GetElapsed( tu );
 
-    Reset();
+	Reset();
 
-    return elapsed;
+	return elapsed;
 }
 
 // ============================
@@ -48,5 +48,5 @@ float Timer::GetElapsedAndReset( const TimeUnit& tu )
 // ============================
 void Timer::Reset()
 {
-    start = chrono::system_clock::now();
+	start = chrono::system_clock::now();
 }

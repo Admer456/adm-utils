@@ -3,34 +3,34 @@
 
 namespace adm
 {
-    constexpr size_t FormatBufferSize = 4096U;
-    constexpr size_t FormatBufferIndices = 4U;
+	constexpr size_t FormatBufferSize = 4096U;
+	constexpr size_t FormatBufferIndices = 4U;
 
-    // Variadic string formatting
-    // Should be threadsafe, so long as each thread uses a different 'slot'
-    template<uint32_t slot = 0, bool DebugFormat = false>
-    inline char* format( char* formatString, ... )
-    {
-        // Hoping the compiler won't optimise this away
-        constexpr uint32_t localSlot = slot;
+	// Variadic string formatting
+	// Should be threadsafe, so long as each thread uses a different 'slot'
+	template<uint32_t slot = 0, bool DebugFormat = false>
+	inline char* format( char* formatString, ... )
+	{
+		// Hoping the compiler won't optimise this away
+		constexpr uint32_t localSlot = slot;
 
-        static char buffer[FormatBufferIndices][FormatBufferSize];
-        static int bufferIndex = 0; // for nested formattings - it happens sometimes
-        static char* bufferPointer = nullptr;
-        va_list arguments;
+		static char buffer[FormatBufferIndices][FormatBufferSize];
+		static int bufferIndex = 0; // for nested formattings - it happens sometimes
+		static char* bufferPointer = nullptr;
+		va_list arguments;
 
-        bufferPointer = buffer[bufferIndex++ % FormatBufferIndices];
-        
-        // Format the string
-        va_start( arguments, formatString );
-        vsprintf( bufferPointer, formatString, arguments );
-        va_end( arguments );
+		bufferPointer = buffer[bufferIndex++ % FormatBufferIndices];
 
-        if constexpr ( DebugFormat )
-        {
-            snprintf( bufferPointer, FormatBufferSize, "%s::DBG::slot%u", bufferPointer, localSlot );
-        }
+		// Format the string
+		va_start( arguments, formatString );
+		vsprintf( bufferPointer, formatString, arguments );
+		va_end( arguments );
 
-        return bufferPointer;
-    }
+		if constexpr ( DebugFormat )
+		{
+			snprintf( bufferPointer, FormatBufferSize, "%s::DBG::slot%u", bufferPointer, localSlot );
+		}
+
+		return bufferPointer;
+	}
 }
