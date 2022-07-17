@@ -33,19 +33,21 @@ set( ADMUTIL_SOURCES
 		src/Containers/Chain.hpp
 		src/Containers/Dictionary.hpp
 		src/Containers/Dictionary.cpp
-		src/Containers/Singleton.hpp 
-		src/Maths/Lerp.hpp 
-		src/Maths/Vec3.hpp 
-		src/Maths/Vec3.cpp 
-		src/Maths/Plane.hpp 
-		src/Maths/Plane.cpp 
-		src/Maths/Polygon.hpp 
-		src/Maths/Polygon.cpp 
-		src/Text/Format.hpp 
-		src/Text/Lexer.hpp 
-		src/Text/Lexer.cpp 
-		src/Time/Timer.hpp 
-		src/Time/Timer.cpp )
+		src/Containers/Singleton.hpp
+		src/Maths/Lerp.hpp
+		src/Maths/Vec3.hpp
+		src/Maths/Vec3.cpp
+		src/Maths/Plane.hpp
+		src/Maths/Plane.cpp
+		src/Maths/Polygon.hpp
+		src/Maths/Polygon.cpp
+		src/Text/Format.hpp
+		src/Text/Lexer.hpp
+		src/Text/Lexer.cpp
+		src/Time/Timer.hpp
+		src/Time/Timer.cpp
+		src/System/Library.hpp
+		src/System/Library.cpp )
 
 ## User of this library: this is what you're interested in
 set ( ADMUTIL_INCLUDE_DIRECTORY
