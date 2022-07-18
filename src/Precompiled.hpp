@@ -33,6 +33,7 @@ namespace adm
 	using String = std::string;
 	using StringView = std::string_view;
 
+	// Double linked list
 	template<class T>
 	using LinkedList = std::list<T>;
 
