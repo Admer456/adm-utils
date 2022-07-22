@@ -111,11 +111,6 @@ adm::Library::operator bool() const
 	return libraryHandle != nullptr;
 }
 
-bool adm::Library::operator!() const
-{
-	return libraryHandle == nullptr;
-}
-
 void* adm::Library::GetFunctionInternal( StringView functionName ) const
 {
 	return SystemFindFunction( libraryHandle, functionName.data() );

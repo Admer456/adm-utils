@@ -28,10 +28,24 @@ namespace adm
 		template<typename functionType>
 		using FunctionReturnType = typename decltype(std::function{ std::declval<functionType>() })::result_type;
 
+		// Parameterless version
+		template<typename functionType,
+			typename returnType = FunctionReturnType<functionType>>
+		inline Optional<returnType> TryExecuteFunction( StringView functionName )
+		{
+			auto func = FindFunction<functionType>( functionName );
+			if ( nullptr == func )
+			{
+				return {};
+			}
+
+			return (*func)();
+		}
+
 		template<typename functionType, 
 			typename structArgumentType, 
 			typename returnType = FunctionReturnType<functionType>>
-		Optional<returnType> TryExecuteFunction( StringView functionName, const structArgumentType& argument )
+		inline Optional<returnType> TryExecuteFunction( StringView functionName, const structArgumentType& argument )
 		{
 			auto func = FindFunction<functionType>( functionName );
 			if ( nullptr == func )
@@ -51,7 +65,6 @@ namespace adm
 		void Dispose();
 
 		operator bool() const;
-		bool operator!() const;
 
 	private:
 		void* GetFunctionInternal( StringView functionName ) const;
