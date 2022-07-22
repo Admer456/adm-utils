@@ -42,6 +42,7 @@ set( ADMUTIL_SOURCES
 		src/Maths/Polygon.hpp
 		src/Maths/Polygon.cpp
 		src/Text/Format.hpp
+		src/Text/JSON.hpp
 		src/Text/Lexer.hpp
 		src/Text/Lexer.cpp
 		src/Time/Timer.hpp

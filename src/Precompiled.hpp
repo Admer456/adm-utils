@@ -27,6 +27,9 @@
 #include <functional>
 #include <memory>
 
+// JSON
+#include <nlohmann/json.hpp>
+
 // Some type aliases for stylistic consistency
 namespace adm
 {
@@ -69,6 +72,7 @@ namespace adm
 // Text processing
 #include "Text/Format.hpp" // Variadic adm::format
 #include "Text/Lexer.hpp" // Text parsing
+#include "Text/JSON.hpp" // JSON parsing, really just a wrapper around nlohmann_json
 
 // Game maths
 #include "Maths/Lerp.hpp"
