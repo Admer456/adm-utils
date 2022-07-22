@@ -52,7 +52,7 @@ set( ADMUTIL_SOURCES
 
 ## User of this library: this is what you're interested in
 set ( ADMUTIL_INCLUDE_DIRECTORY
-		${ADMUTIL_ROOT}/src 
+		${ADMUTIL_ROOT}/src
 		CACHE INTERNAL "" )
 
 ## If someone's embedding this, let them group the sources 
@@ -71,11 +71,12 @@ if ( NOT ADMUTIL_NONLIB )
 		ARCHIVE DESTINATION ${ADMUTIL_ROOT}/lib )
 
 	## Include directories
-	target_include_directories( AdmUtils PRIVATE
-			${ADMUTIL_INCLUDE_DIRECTORY} )
+	target_include_directories( AdmUtils PUBLIC
+			${ADMUTIL_INCLUDE_DIRECTORY} 
+			extern/nlohmann-json/include )
 
 	## Precompiled headers
-	target_precompile_headers( AdmUtils PRIVATE 
+	target_precompile_headers( AdmUtils PRIVATE
 			src/Precompiled.hpp )
 else()
 	include_directories( ${ADMUTIL_INCLUDE_DIRECTORY} )
