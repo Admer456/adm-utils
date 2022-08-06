@@ -79,6 +79,7 @@ namespace adm
 #include "Maths/Vec3.hpp" // 3D vector
 #include "Maths/Plane.hpp"
 #include "Maths/Polygon.hpp"
+#include "Maths/AABB.hpp"
 
 // Containers and utilities
 #include "Containers/Singleton.hpp" // Singleton wrapper

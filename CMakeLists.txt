@@ -34,6 +34,7 @@ set( ADMUTIL_SOURCES
 		src/Containers/Dictionary.hpp
 		src/Containers/Dictionary.cpp
 		src/Containers/Singleton.hpp
+		src/Maths/AABB.hpp
 		src/Maths/Lerp.hpp
 		src/Maths/Vec3.hpp
 		src/Maths/Vec3.cpp
