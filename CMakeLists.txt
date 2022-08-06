@@ -33,6 +33,7 @@ set( ADMUTIL_SOURCES
 		src/Containers/Chain.hpp
 		src/Containers/Dictionary.hpp
 		src/Containers/Dictionary.cpp
+		src/Containers/NTree.hpp
 		src/Containers/Singleton.hpp
 		src/Maths/AABB.hpp
 		src/Maths/Lerp.hpp

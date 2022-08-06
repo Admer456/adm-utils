@@ -82,6 +82,7 @@ namespace adm
 #include "Maths/AABB.hpp"
 
 // Containers and utilities
+#include "Containers/NTree.hpp" // N-dimensional tree, quadtree, octree
 #include "Containers/Singleton.hpp" // Singleton wrapper
 #include "Containers/Chain.hpp" // Class-wide static linked list
 #include "Containers/Dictionary.hpp" // Dictionary/KV pairs
