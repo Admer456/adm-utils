@@ -20,7 +20,7 @@ namespace adm
 	template<typename T>
 	constexpr T Lerp( const T& a, const T& b, const float& alpha )
 	{
-		return (a * 1.0f - alpha) + (b * alpha);
+		return (a * (1.0f - alpha)) + (b * alpha);
 	}
 
 	// Non-linear transforms
