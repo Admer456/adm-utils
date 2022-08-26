@@ -48,7 +48,6 @@ set( ADMUTIL_SOURCES
 		src/Text/Lexer.hpp
 		src/Text/Lexer.cpp
 		src/Time/Timer.hpp
-		src/Time/Timer.cpp
 		src/System/Library.hpp
 		src/System/Library.cpp )
 
