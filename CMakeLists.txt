@@ -33,7 +33,9 @@ set( ADMUTIL_SOURCES
 		src/Containers/Chain.hpp
 		src/Containers/Dictionary.hpp
 		src/Containers/Dictionary.cpp
+		src/Containers/NTree.hpp
 		src/Containers/Singleton.hpp
+		src/Maths/AABB.hpp
 		src/Maths/Lerp.hpp
 		src/Maths/Vec3.hpp
 		src/Maths/Vec3.cpp
@@ -46,7 +48,6 @@ set( ADMUTIL_SOURCES
 		src/Text/Lexer.hpp
 		src/Text/Lexer.cpp
 		src/Time/Timer.hpp
-		src/Time/Timer.cpp
 		src/System/Library.hpp
 		src/System/Library.cpp )
 
