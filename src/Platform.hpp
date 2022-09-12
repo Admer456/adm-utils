@@ -31,3 +31,24 @@ namespace adm
 	static_assert(false, "Unsupported platform");
 #endif
 }
+
+// You may want to use HINSTANCE or HWND somewhere, so here you go
+#if ADM_PLATFORM == PLATFORM_WINDOWS
+
+#define NOMINMAX 1
+#include <Windows.h>
+
+// If you specifically need this, just use CreateWindowA or something
+#ifdef CreateWindow
+#undef CreateWindow
+#endif
+
+#ifdef DrawText
+#undef DrawText
+#endif
+
+#elif ADM_PLATFORM == PLATFORM_LINUX
+
+// Add X11 and other stuff here
+
+#endif
