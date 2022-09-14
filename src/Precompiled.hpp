@@ -89,6 +89,7 @@ namespace adm
 
 // Time utilities
 #include "Time/Timer.hpp" // Scope-based timer
+#include "Time/DateTime.hpp" // Date & time utilities
 
 // System-interfacing stuff
 #include "System/Library.hpp"

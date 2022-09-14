@@ -1,0 +1,2 @@
+// With most files removed
+WhereFrom: https://github.com/HowardHinnant/date/tree/22ceabf205d8d678710a43154da5a06b701c5830

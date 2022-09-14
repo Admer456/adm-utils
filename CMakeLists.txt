@@ -47,6 +47,8 @@ set( ADMUTIL_SOURCES
 		src/Text/JSON.hpp
 		src/Text/Lexer.hpp
 		src/Text/Lexer.cpp
+		src/Time/DateTime.hpp
+		src/Time/DateTime.cpp
 		src/Time/Timer.hpp
 		src/System/Library.hpp
 		src/System/Library.cpp )
@@ -73,7 +75,8 @@ if ( NOT ADMUTIL_NONLIB )
 
 	## Include directories
 	target_include_directories( AdmUtils PUBLIC
-			${ADMUTIL_INCLUDE_DIRECTORY} 
+			${ADMUTIL_INCLUDE_DIRECTORY}
+			extern/date/include
 			extern/nlohmann-json/include )
 
 	## Precompiled headers
