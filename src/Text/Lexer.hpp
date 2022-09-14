@@ -52,7 +52,7 @@ namespace adm
 		void			SetDelimiters( const char* delimiters );
 
 		// Gets the next token and advances
-		std::string		Next();
+		std::string		Next( bool withDelimiter = false );
 		// Compares the next token to expectedToken, optionally
 		// advancing the position in the buffer
 		bool			Expect( const char* expectedToken, bool advance = false );

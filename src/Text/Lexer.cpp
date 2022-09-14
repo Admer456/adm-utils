@@ -139,7 +139,7 @@ void Lexer::SetDelimiters( const char* delimiters )
 // ============================
 // Lexer::Next
 // ============================
-String Lexer::Next()
+String Lexer::Next( bool withDelimiter )
 {
 	String result;
 
@@ -148,7 +148,7 @@ String Lexer::Next()
 	do
 	{
 		// Skip any whitespaces etc. after a token
-		while ( !CanAdvance() && !IsEndOfFile() )
+		while ( !CanAdvance() && !IsDelimiter() && !IsEndOfFile() )
 		{
 			if ( IsComment() )
 			{
@@ -172,9 +172,15 @@ String Lexer::Next()
 		// Check for delimiters
 		if ( IsDelimiter() )
 		{
-		   result = view[position];
-		   IncrementPosition();
-		   break;
+			if ( withDelimiter )
+			{
+				result = char( view[position] );
+				IncrementPosition();
+				return result;
+			}
+
+			IncrementPosition();
+			continue;
 		}
 
 		while ( CanAdvance() )
@@ -292,6 +298,11 @@ bool Lexer::CanAdvance() const
 		return !IsEndOfFile() && c != '"';
 	}
 
+	if ( IsDelimiter() )
+	{
+		return false;
+	}
+
 	return c != ' ' && c != '\t' && c != '\0' && !IsEndOfLine();
 }
 
@@ -335,7 +346,7 @@ inline bool Lexer::IsEndOfLine() const
 // ============================
 inline bool Lexer::IsDelimiter() const
 {
-	return delimiterString.find( view[position] ) != String::npos;
+	return (delimiterString.find( view[position] ) != String::npos) && !inQuote;
 }
 
 // ============================
