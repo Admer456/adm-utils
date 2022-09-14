@@ -141,7 +141,12 @@ void Lexer::SetDelimiters( const char* delimiters )
 // ============================
 String Lexer::Next( bool withDelimiter )
 {
-	String result;
+	if ( IsEndOfFile() )
+	{
+		return "";
+	}
+
+	String result{};
 
 	// This do-while loop is responsible for skipping "empty" lines
 	// and advancing to the next ones, until we get a usable token
@@ -157,6 +162,10 @@ String Lexer::Next( bool withDelimiter )
 			}
 
 			position++;
+			if ( IsEndOfFile() )
+			{
+				return "";
+			}
 		}
 
 		// Can't go any further
