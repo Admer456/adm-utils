@@ -20,6 +20,9 @@ cmake_minimum_required( VERSION 3.16 )
 set( CMAKE_CXX_STANDARD 17 )
 
 option( ADMUTIL_NONLIB "Bundle the library into another project instead of compiling a .lib; will define ADMUTIL_ALL_SRC which you can then include in your project" OFF )
+if ( UNIX )
+	option( ADMUTIL_USE_WAYLAND "Use Wayland instead of X11" OFF )
+endif()
 
 if ( NOT ADMUTIL_NONLIB )
 	project( AdmUtils )
@@ -83,6 +86,19 @@ if ( NOT ADMUTIL_NONLIB )
 			extern/date/include
 			extern/nlohmann-json/include )
 
+	## On Linux, choose between X11 and Wayland
+	if ( UNIX )
+		if ( ADMUTIL_USE_WAYLAND )
+			target_compile_definitions( AdmUtils PUBLIC ADM_USE_WAYLAND=1 )
+			target_compile_definitions( AdmUtils PUBLIC ADM_USE_X11=0 )
+		else()
+			target_compile_definitions( AdmUtils PUBLIC ADM_USE_WAYLAND=0 )
+			target_compile_definitions( AdmUtils PUBLIC ADM_USE_X11=1 )
+		endif()
+	else()
+		target_compile_definitions( AdmUtils PUBLIC ADM_USE_WAYLAND=0 )
+		target_compile_definitions( AdmUtils PUBLIC ADM_USE_X11=0 )
+	endif()
 	## Precompiled headers
 	target_precompile_headers( AdmUtils PRIVATE
 			src/Precompiled.hpp )
