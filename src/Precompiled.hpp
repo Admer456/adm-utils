@@ -76,7 +76,9 @@ namespace adm
 
 // Game maths
 #include "Maths/Lerp.hpp"
+#include "Maths/Vec2.hpp" // 2D vector
 #include "Maths/Vec3.hpp" // 3D vector
+#include "Maths/Vec4.hpp" // 4D vector
 #include "Maths/Plane.hpp"
 #include "Maths/Polygon.hpp"
 #include "Maths/AABB.hpp"
