@@ -23,7 +23,11 @@ namespace adm
 		// 3D length of this vector
 		inline float 		Length() const
 		{
-			return std::sqrt( x*x + y*y + z*z );
+			return std::sqrt( LengthSquared() );
+		}
+		inline float		LengthSquared() const
+		{
+			return x*x + y*y + z*z;
 		}
 		// destination - this
 		inline Vec3 		DirectionTo( const Vec3& destination, bool normalized = false ) const
