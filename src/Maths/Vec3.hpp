@@ -253,6 +253,16 @@ inline adm::Vec3 operator* ( const float& lhs, const adm::Vec3& rhs )
 	};
 }
 
+// float / Vec3
+inline adm::Vec3 operator/ ( const float& lhs, const adm::Vec3& rhs )
+{
+	return adm::Vec3{
+		lhs / rhs.x,
+		lhs / rhs.y,
+		lhs / rhs.z
+	};
+}
+
 namespace std
 {
 	// Extending le standard bibliotheque to support Vec3

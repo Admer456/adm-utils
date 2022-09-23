@@ -270,6 +270,15 @@ inline adm::Vec4 operator* ( const float& lhs, const adm::Vec4& rhs )
 		rhs.m.w * lhs
 	};
 }
+
+// float / Vec4
+inline adm::Vec4 operator/ ( const float& lhs, const adm::Vec4& rhs )
+{
+	return adm::Vec4{
+		lhs / rhs.m.x,
+		lhs / rhs.m.y,
+		lhs / rhs.m.z,
+		lhs / rhs.m.w
 	};
 }
 

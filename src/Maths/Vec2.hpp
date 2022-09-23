@@ -238,6 +238,15 @@ inline adm::Vec2 operator* ( const float& lhs, const adm::Vec2& rhs )
 	};
 }
 
+// float / Vec2
+inline adm::Vec2 operator/ ( const float& lhs, const adm::Vec2& rhs )
+{
+	return adm::Vec2{
+		lhs / rhs.x,
+		lhs / rhs.y
+	};
+}
+
 namespace std
 {
 	// Extending le standard bibliotheque to support Vec2
