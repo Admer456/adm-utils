@@ -14,6 +14,10 @@ Vec3::Vec3( const char* string )
 	}
 
 	Lexer lex( string );
+	if ( lex.IsEndOfFile() )
+	{
+		return;
+	}
 	
 	x = std::stof( lex.Next() );
 	if ( !lex.IsEndOfFile() )
