@@ -130,6 +130,20 @@ namespace adm
 		static const Vec4 Identity;
 		static const Vec4 Zero;
 
+		static const Vec4 Red;
+		static const Vec4 Orange;
+		static const Vec4 Yellow;
+		static const Vec4 Green;
+		static const Vec4 LightGreen;
+		static const Vec4 Blue;
+		static const Vec4 LightBlue;
+		static const Vec4 Cyan;
+		static const Vec4 Pink;
+		static const Vec4 Purple;
+		static const Vec4 Grey;
+		static const Vec4 White;
+		static const Vec4 Black;
+
 	public: // Operators
 		// Vec4 + Vec4 
 		inline Vec4 		operator+ ( const Vec4& rhs ) const
