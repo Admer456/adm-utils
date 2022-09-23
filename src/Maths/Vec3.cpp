@@ -3,6 +3,24 @@
 using namespace adm;
 
 // ============================
+// Vec3::ctor adapter for Vec2
+// ============================
+constexpr Vec3::Vec3( const Vec2& v, float Z )
+	: x( v.x ), y( v.y ), z( Z )
+{
+
+}
+
+// ============================
+// Vec3::ctor adapter for Vec4
+// ============================
+constexpr Vec3::Vec3( const Vec4& v )
+	: x( v.m.x ), y( v.m.y ), z( v.m.z )
+{
+
+}
+
+// ============================
 // Vec3::ctor for C strings
 // ============================
 Vec3::Vec3( const char* string )

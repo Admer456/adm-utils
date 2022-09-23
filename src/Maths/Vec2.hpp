@@ -3,6 +3,9 @@
 
 namespace adm
 {
+	class Vec3;
+	class Vec4;
+
 	// ============================
 	// 2D vector class for game logic and rendering
 	// ============================
@@ -14,8 +17,8 @@ namespace adm
 		constexpr Vec2( float X, float Y ) : x(X), y(Y) {}
 		constexpr Vec2( Vec2&& v ) noexcept = default;
 		constexpr Vec2( const Vec2& v ) = default;
-		constexpr Vec2( const Vec3& v ) : x(v.x), y(v.y) {}
-		constexpr Vec2( const Vec4& v ) : x(v.x), y(v.y) {}
+		constexpr Vec2( const Vec3& v );
+		constexpr Vec2( const Vec4& v );
 		Vec2( const char* string );
 
 		// Generic 2-float array support

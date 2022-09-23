@@ -12,19 +12,26 @@ namespace adm
 	// ============================
 	class Vec4 final
 	{
+	public:
+	#if ADM_USE_SSE
+		using SimdType = __m128;
+	#else
+		using SimdType = struct { float data[4]; };
+	#endif
+
 	public: // Construction
-		constexpr Vec4() = default;
-		constexpr explicit Vec4( float XYZW ) : x(XYZW), y(XYZW), z(XYZW), w(XYZW) {}
-		constexpr Vec4( float X, float Y, float Z, float W ) : x(X), y(Y), z(Z), w(W) {}
-		constexpr Vec4( Vec4&& v ) noexcept = default;
-		constexpr Vec4( const Vec2& vec ) : x(vec.x), y(vec.y) {}
-		constexpr Vec4( const Vec3& vec ) : x(vec.x), y(vec.y), z(vec.z) {}
-		constexpr Vec4( const Vec3& vec, float W ) : x(vec.x), y(vec.y), z(vec.z), w(W) {}
+		Vec4() = default;
+		constexpr explicit Vec4( float XYZW ) : m{ XYZW, XYZW, XYZW, XYZW } {}
+		constexpr Vec4( float X, float Y, float Z, float W ) : m{ X, Y, Z, W } {}
+		constexpr Vec4( const Vec2& vec, float Z = 0.0f, float W = 0.0f ) : m{ vec.x, vec.y, Z, W } {}
+		constexpr Vec4( const Vec3& vec, float W = 0.0f ) : m{ vec.x, vec.y, vec.z, W } {}
 		constexpr Vec4( const Vec4& v ) = default;
 		Vec4( const char* string );
 
 		// Generic 4-float array support
-		constexpr Vec4( const float* vec ) : x(vec[0]), y(vec[1]), z(vec[2]), w(vec[3]) {}
+		constexpr Vec4( const float* vec ) : m{ vec[0], vec[1], vec[2], vec[3] } {}
+		// Initialisation from SIMD value
+		constexpr Vec4( SimdType simdValue ) : simdValue( simdValue ) {}
 
 	public: // Methods
 		// 4D length of this vector
@@ -34,7 +41,7 @@ namespace adm
 		}
 		inline float		LengthSquared() const
 		{
-			return x*x + y*y + z*z + w*w;
+			return m.x*m.x + m.y*m.y + m.z*m.z + m.w*m.w;
 		}
 		// destination - this
 		inline Vec4 		DirectionTo( const Vec4& destination, bool normalized = false ) const
@@ -68,24 +75,24 @@ namespace adm
 		// Returns a dot product of this vector with another
 		inline float 		Dot( const Vec4& vec ) const
 		{
-			return x*vec.x + y*vec.y + z*vec.z + w*vec.w;
+			return m.x*vec.m.x + m.y*vec.m.y + m.z*vec.m.z + m.w*vec.m.w;
 		}
 		// Snaps this vector to an integer grid
 		inline const Vec4& 	Snap( const int& grid = 1 )
 		{
 			if ( grid == 1 )
 			{
-				x = int(x);
-				y = int(y);
-				z = int(z);
-				w = int(w);
+				m.x = int(m.x);
+				m.y = int(m.y);
+				m.z = int(m.z);
+				m.w = int(m.w);
 				return *this;
 			}
 
-			x = int(x / grid) * grid;
-			y = int(y / grid) * grid;
-			z = int(z / grid) * grid;
-			w = int(w / grid) * grid;
+			m.x = int(m.x / grid) * grid;
+			m.y = int(m.y / grid) * grid;
+			m.z = int(m.z / grid) * grid;
+			m.w = int(m.w / grid) * grid;
 			return *this;
 		}
 		// Returns a snapped copy of this vector
@@ -111,10 +118,10 @@ namespace adm
 		// vectors with an epsilon value
 		bool 				Equals( const Vec4& vec, const float& epsilon = 0.05f ) const
 		{
-			bool X = (x < vec.x + epsilon) && (x > vec.x - epsilon);
-			bool Y = (y < vec.y + epsilon) && (y > vec.y - epsilon);
-			bool Z = (z < vec.z + epsilon) && (z > vec.z - epsilon);
-			bool W = (w < vec.w + epsilon) && (w > vec.w - epsilon);
+			bool X = (m.x < vec.m.x + epsilon) && (m.x > vec.m.x - epsilon);
+			bool Y = (m.y < vec.m.y + epsilon) && (m.y > vec.m.y - epsilon);
+			bool Z = (m.z < vec.m.z + epsilon) && (m.z > vec.m.z - epsilon);
+			bool W = (m.w < vec.m.w + epsilon) && (m.w > vec.m.w - epsilon);
 
 			return X && Y && Z && W;
 		}
@@ -128,39 +135,39 @@ namespace adm
 		inline Vec4 		operator+ ( const Vec4& rhs ) const
 		{
 			return Vec4{
-				x + rhs.x,
-				y + rhs.y,
-				z + rhs.z,
-				w + rhs.w
+				m.x + rhs.m.x,
+				m.y + rhs.m.y,
+				m.z + rhs.m.z,
+				m.w + rhs.m.w
 			};
 		}
 		// Vec4 - Vec4
 		inline Vec4			operator- ( const Vec4& rhs ) const
 		{
 			return Vec4{
-				x - rhs.x,
-				y - rhs.y,
-				z - rhs.z,
-				w - rhs.w
+				m.x - rhs.m.x,
+				m.y - rhs.m.y,
+				m.z - rhs.m.z,
+				m.w - rhs.m.w
 			};
 		}
 		// += Vec4
 		inline const Vec4& 	operator+= ( const Vec4& rhs )
 		{
-			x += rhs.x;
-			y += rhs.y;
-			z += rhs.z;
-			w += rhs.w;
+			m.x += rhs.m.x;
+			m.y += rhs.m.y;
+			m.z += rhs.m.z;
+			m.w += rhs.m.w;
 
 			return *this;
 		}
 		// -= Vec4
 		inline const Vec4& 	operator-= ( const Vec4& rhs )
 		{
-			x -= rhs.x;
-			y -= rhs.y;
-			z -= rhs.z;
-			w -= rhs.w;
+			m.x -= rhs.m.x;
+			m.y -= rhs.m.y;
+			m.z -= rhs.m.z;
+			m.w -= rhs.m.w;
 
 			return *this;
 		}
@@ -172,15 +179,15 @@ namespace adm
 		// Vec4 == Vec4
 		inline bool 		operator== ( const Vec4& rhs ) const
 		{
-			return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w;
+			return m.x == rhs.m.x && m.y == rhs.m.y && m.z == rhs.m.z && m.w == rhs.m.w;
 		}
 		// Vec4 = Vec4
 		inline const Vec4& 	operator= ( const Vec4& rhs )
 		{
-			x = rhs.x;
-			y = rhs.y;
-			z = rhs.z;
-			w = rhs.w;
+			m.x = rhs.m.x;
+			m.y = rhs.m.y;
+			m.z = rhs.m.z;
+			m.w = rhs.m.w;
 
 			return *this;
 		}
@@ -193,55 +200,63 @@ namespace adm
 		inline Vec4 		operator* ( const float& rhs ) const
 		{
 			return Vec4{
-				x * rhs,
-				y * rhs,
-				z * rhs,
-				w * rhs
+				m.x * rhs,
+				m.y * rhs,
+				m.z * rhs,
+				m.w * rhs
 			};
 		}
 		// Vec4 / float
 		inline Vec4 		operator/ ( const float& rhs ) const
 		{
 			return Vec4{
-				x / rhs,
-				y / rhs,
-				z / rhs,
-				w / rhs
+				m.x / rhs,
+				m.y / rhs,
+				m.z / rhs,
+				m.w / rhs
 			};
 		}
 		// Vec4 *= float
 		inline const Vec4& 	operator*= ( const float& rhs )
 		{
-			x *= rhs;
-			y *= rhs;
-			z *= rhs;
-			w *= rhs;
+			m.x *= rhs;
+			m.y *= rhs;
+			m.z *= rhs;
+			m.w *= rhs;
 
 			return *this;
 		}
 		// Vec4 /= float
 		inline const Vec4& 	operator/= ( const float& rhs )
 		{
-			x /= rhs;
-			y /= rhs;
-			z /= rhs;
-			w /= rhs;
+			m.x /= rhs;
+			m.y /= rhs;
+			m.z /= rhs;
+			m.w /= rhs;
 
 			return *this;
 		}
 		// Generic float array support, in case someone uses this library with Quake or Half-Life
 		inline operator		float* ()
 		{
-			return &x;
+			return &m.x;
 		}
 		// Const version
 		inline operator		const float*() const
 		{
-			return &x;
+			return &m.x;
 		}
 
 	public:
-		float x{ 0.0f }, y{ 0.0f }, z{ 0.0f }, w{ 0.0f };
+		union
+		{
+			SimdType simdValue;
+			struct
+			{
+				float x, y, z, w;
+			} m;
+		};
+		
 	};
 }
 
@@ -249,10 +264,12 @@ namespace adm
 inline adm::Vec4 operator* ( const float& lhs, const adm::Vec4& rhs )
 {
 	return adm::Vec4{
-		rhs.x * lhs,
-		rhs.y * lhs,
-		rhs.z * lhs,
-		rhs.w * lhs
+		rhs.m.x * lhs,
+		rhs.m.y * lhs,
+		rhs.m.z * lhs,
+		rhs.m.w * lhs
+	};
+}
 	};
 }
 
@@ -263,23 +280,23 @@ namespace std
 	{
 		// TODO: use fmtlib, sprintf is like 20x slower
 		char buffer[128]; // God forbid you put such a large number to overflow this...
-		snprintf( buffer, 128, "%f %f %f %f", val.x, val.y, val.z, val.w );
+		snprintf( buffer, 128, "%f %f %f %f", val.m.x, val.m.y, val.m.z, val.m.w );
 		return std::string( buffer );
 	}
 
 	inline adm::Vec4 fabs( const adm::Vec4& v )
 	{
 		return adm::Vec4{
-			fabs( v.x ),
-			fabs( v.y ),
-			fabs( v.z ),
-			fabs( v.w )
+			fabs( v.m.x ),
+			fabs( v.m.y ),
+			fabs( v.m.z ),
+			fabs( v.m.w )
 		};
 	}
 }
 
 inline std::ostream& operator << ( std::ostream& os, const adm::Vec4& vec )
 {
-	os << vec.x << " " << vec.y << " " << vec.z << " " << vec.w;
+	os << vec.m.x << " " << vec.m.y << " " << vec.m.z << " " << vec.m.w;
 	return os;
 }

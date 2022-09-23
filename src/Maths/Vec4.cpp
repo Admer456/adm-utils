@@ -19,18 +19,18 @@ Vec4::Vec4( const char* string )
 		return;
 	}
 	
-	x = std::stof( lex.Next() );
+	m.x = std::stof( lex.Next() );
 	if ( !lex.IsEndOfFile() )
 	{
-		y = std::stof( lex.Next() );
+		m.y = std::stof( lex.Next() );
 	}
 	if ( !lex.IsEndOfFile() )
 	{
-		z = std::stof( lex.Next() );
+		m.z = std::stof( lex.Next() );
 	}
 	if ( !lex.IsEndOfFile() )
 	{
-		w = std::stof( lex.Next() );
+		m.w = std::stof( lex.Next() );
 	}
 }
 

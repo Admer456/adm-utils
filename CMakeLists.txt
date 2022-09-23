@@ -37,8 +37,12 @@ set( ADMUTIL_SOURCES
 		src/Containers/Singleton.hpp
 		src/Maths/AABB.hpp
 		src/Maths/Lerp.hpp
+		src/Maths/Vec2.hpp
+		src/Maths/Vec2.cpp
 		src/Maths/Vec3.hpp
 		src/Maths/Vec3.cpp
+		src/Maths/Vec4.hpp
+		src/Maths/Vec4.cpp
 		src/Maths/Plane.hpp
 		src/Maths/Plane.cpp
 		src/Maths/Polygon.hpp

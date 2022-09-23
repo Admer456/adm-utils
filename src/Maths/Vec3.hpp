@@ -15,11 +15,9 @@ namespace adm
 		constexpr Vec3() = default;
 		constexpr explicit Vec3( float XYZ ) : x(XYZ), y(XYZ), z(XYZ) {}
 		constexpr Vec3( float X, float Y, float Z ) : x(X), y(Y), z(Z) {}
-		constexpr Vec3( Vec3&& v ) noexcept = default;
-		constexpr Vec3( const Vec2& vec ) : x(vec.x), y(vec.y) {}
-		constexpr Vec3( const Vec2& vec, float Z ) : x(vec.x), y(vec.y), z(Z) {}
+		constexpr Vec3( const Vec2& v, float Z = 0.0f );
 		constexpr Vec3( const Vec3& v ) = default;
-		constexpr Vec3( const Vec4& vec ) : x(vec.x), y(vec.y), z(vec.z) {}
+		constexpr Vec3( const Vec4& v );
 		Vec3( const char* string );
 
 		// Generic 3-float array support
