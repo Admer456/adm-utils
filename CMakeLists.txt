@@ -20,6 +20,7 @@ cmake_minimum_required( VERSION 3.16 )
 set( CMAKE_CXX_STANDARD 17 )
 
 option( ADMUTIL_NONLIB "Bundle the library into another project instead of compiling a .lib; will define ADMUTIL_ALL_SRC which you can then include in your project" OFF )
+option( ADMUTIL_USE_SSE41 "Use the SSE 4.1 instruction set (should be supported on most CPUs)" ON )
 if ( UNIX )
 	option( ADMUTIL_USE_WAYLAND "Use Wayland instead of X11" OFF )
 endif()
@@ -99,6 +100,19 @@ if ( NOT ADMUTIL_NONLIB )
 		target_compile_definitions( AdmUtils PUBLIC ADM_USE_WAYLAND=0 )
 		target_compile_definitions( AdmUtils PUBLIC ADM_USE_X11=0 )
 	endif()
+
+	if ( ADMUTIL_USE_SSE41 )
+		target_compile_definitions( AdmUtils PUBLIC ADM_USE_SSE41=1 )
+	else()
+		target_compile_definitions( AdmUtils PUBLIC ADM_USE_SSE41=0 )
+	endif()
+
+	if ( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" )
+		## Nothing, there's no special SSE4 flag for MSVC it seems
+	else() ## GCC, Clang
+		set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse4.1" )
+	endif()
+
 	## Precompiled headers
 	target_precompile_headers( AdmUtils PRIVATE
 			src/Precompiled.hpp )
