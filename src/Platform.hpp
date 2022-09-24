@@ -59,6 +59,9 @@ namespace adm
 
 #endif
 
+// ADM_EXPORT for DLL exporting stuff
+// Very platform-specific matters
+
 // Visual Studio 2017 15.3 supports C++17 AFAIK
 #if defined(_MSC_VER) && _MSC_VER > 1911
 #define ADM_EXPORT __declspec(dllexport)
@@ -86,4 +89,17 @@ namespace adm
 
 #endif
 
+// ADM_EXPORT void Something() would export, but it'd end up with random
+// characters in places and it'd be pretty hard to obtain a function pointer to it
+// using the adm::Library utility
+// ADM_API void Something() would just export as _Something, however you
+// cannot return references or have them as arguments. You're limited to "C-style
+// datatypes" if that makes sense, so only primitive datatypes, PODs and pointers
+
+// Export an API without name mangling, so it can be easily looked up by adm::Library
 #define ADM_API extern "C" ADM_EXPORT
+
+// SSE stuff
+#if ADM_USE_SSE41
+#include <immintrin.h>
+#endif

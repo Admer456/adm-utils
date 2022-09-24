@@ -13,7 +13,7 @@ namespace adm
 	class Vec4 final
 	{
 	public:
-	#if ADM_USE_SSE
+	#if ADM_USE_SSE41
 		using SimdType = __m128;
 	#else
 		using SimdType = struct { float data[4]; };
