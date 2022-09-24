@@ -35,7 +35,13 @@ namespace adm
 		static Mat4				Perspective( float fovY, float aspectRatio, float zNear, float zFar );
 		// Constructs an orthographic projection matrix
 		static Mat4				Orthographic( float left, float right, float bottom, float top, float zNear, float zFar );
-		
+		// Constructs a view matrix
+		// @param position: XYZ position in space
+		// @param angles: Euler angles in pitch, yaw, roll
+		// TODO: we need an Angles class or Euler whatever
+		static Mat4				View( const Vec3& position, const Vec3& angles );
+		//static Mat4			View( const Vec3& position, const Quat& orientation );
+
 	public: // Methods
 		// Comparison with an epsilon
 		inline bool				Equals( const Mat4& mat, float maxDistanceSquared = 1.0e-12f ) const;
