@@ -132,13 +132,13 @@ namespace adm
 	}
 
 	// ============================
-	// Mat4::v4ersed
+	// Mat4::Inversed
 	// ============================
 	inline Mat4 Mat4::Inversed() const
 	{
 #if ADM_USE_SSE41
 		// Algorithm from: http://download.intel.com/design/PentiumIII/sml/24504301.pdf
-		// Streaming SIMD Extensions - v4erse of 4x4 Matrix
+		// Streaming SIMD Extensions - inverse of 4x4 Matrix
 		// Adapted to load data using _mm_shuffle_ps instead of loading from memory
 		// Replaced _mm_rcp_ps with _mm_div_ps for better accuracy
 
