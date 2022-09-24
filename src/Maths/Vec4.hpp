@@ -220,6 +220,11 @@ namespace adm
 				m.w * rhs
 			};
 		}
+		// float * Vec4
+		friend inline Vec4	operator* ( const float& lhs, const Vec4& rhs )
+		{
+			return rhs * lhs;
+		}
 		// Vec4 / float
 		inline Vec4 		operator/ ( const float& rhs ) const
 		{
@@ -229,6 +234,11 @@ namespace adm
 				m.z / rhs,
 				m.w / rhs
 			};
+		}
+		// float / Vec4
+		friend inline Vec4	operator/ ( const float& lhs, const Vec4& rhs )
+		{
+			return rhs / lhs;
 		}
 		// Vec4 *= float
 		inline const Vec4& 	operator*= ( const float& rhs )
@@ -271,28 +281,6 @@ namespace adm
 			} m;
 		};
 		
-	};
-}
-
-// float * Vec4
-inline adm::Vec4 operator* ( const float& lhs, const adm::Vec4& rhs )
-{
-	return adm::Vec4{
-		rhs.m.x * lhs,
-		rhs.m.y * lhs,
-		rhs.m.z * lhs,
-		rhs.m.w * lhs
-	};
-}
-
-// float / Vec4
-inline adm::Vec4 operator/ ( const float& lhs, const adm::Vec4& rhs )
-{
-	return adm::Vec4{
-		lhs / rhs.m.x,
-		lhs / rhs.m.y,
-		lhs / rhs.m.z,
-		lhs / rhs.m.w
 	};
 }
 

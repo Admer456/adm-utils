@@ -189,6 +189,11 @@ namespace adm
 				y * rhs
 			};
 		}
+		// float * Vec2
+		friend inline Vec2	operator* ( const float& lhs, const Vec2& rhs )
+		{
+			return rhs * lhs;
+		}
 		// Vec2 / float
 		inline Vec2 		operator/ ( const float& rhs ) const
 		{
@@ -196,6 +201,11 @@ namespace adm
 				x / rhs,
 				y / rhs
 			};
+		}
+		// float / Vec2
+		friend inline Vec2	operator/ ( const float& lhs, const Vec2& rhs )
+		{
+			return rhs / lhs;
 		}
 		// Vec2 *= float
 		inline const Vec2& 	operator*= ( const float& rhs )
@@ -226,24 +236,6 @@ namespace adm
 
 	public:
 		float x{ 0.0f }, y{ 0.0f };
-	};
-}
-
-// float * Vec2
-inline adm::Vec2 operator* ( const float& lhs, const adm::Vec2& rhs )
-{
-	return adm::Vec2{
-		rhs.x * lhs,
-		rhs.y * lhs
-	};
-}
-
-// float / Vec2
-inline adm::Vec2 operator/ ( const float& lhs, const adm::Vec2& rhs )
-{
-	return adm::Vec2{
-		lhs / rhs.x,
-		lhs / rhs.y
 	};
 }
 

@@ -168,7 +168,7 @@ namespace adm
 			return *this;
 		}
 		// -Vec3
-		inline Vec3 operator- () const
+		inline Vec3			operator- () const
 		{
 			return *this * -1.0f;
 		}
@@ -200,6 +200,11 @@ namespace adm
 				z * rhs
 			};
 		}
+		// float * Vec3
+		friend inline Vec3	operator* ( const float& lhs, const Vec3& rhs )
+		{
+			return rhs * lhs;
+		}
 		// Vec3 / float
 		inline Vec3 		operator/ ( const float& rhs ) const
 		{
@@ -208,6 +213,11 @@ namespace adm
 				y / rhs,
 				z / rhs
 			};
+		}
+		// float / Vec3;
+		friend inline Vec3	operator/ ( const float& lhs, const Vec3& rhs )
+		{
+			return rhs / lhs;
 		}
 		// Vec3 *= float
 		inline const Vec3& 	operator*= ( const float& rhs )
@@ -239,27 +249,7 @@ namespace adm
 		}
 
 	public:
-		float x{0.0f}, y{0.0f}, z{0.0f};
-	};
-}
-
-// float * Vec3
-inline adm::Vec3 operator* ( const float& lhs, const adm::Vec3& rhs )
-{
-	return adm::Vec3{
-		rhs.x * lhs,
-		rhs.y * lhs,
-		rhs.z * lhs
-	};
-}
-
-// float / Vec3
-inline adm::Vec3 operator/ ( const float& lhs, const adm::Vec3& rhs )
-{
-	return adm::Vec3{
-		lhs / rhs.x,
-		lhs / rhs.y,
-		lhs / rhs.z
+		float x{ 0.0f }, y{ 0.0f }, z{ 0.0f };
 	};
 }
 
