@@ -349,10 +349,18 @@ namespace adm
 	// ============================
 	inline Mat4& Mat4::operator*= ( float rhs )
 	{
+#if ADM_USE_SSE41
+		const Vec4 rhsSimd( rhs );
+		for ( int i = 0; i < 4; i++ )
+		{
+			columns[i].simdValue = _mm_mul_ps( columns[i].simdValue, rhsSimd.simdValue );
+		}
+#else
 		for ( int i = 0; i < 4; i++ )
 		{
 			columns[i] *= rhs;
 		}
+#endif
 	}
 
 	// ============================
