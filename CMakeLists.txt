@@ -41,6 +41,9 @@ set( ADMUTIL_SOURCES
 		src/Containers/Singleton.hpp
 		src/Maths/AABB.hpp
 		src/Maths/Lerp.hpp
+		src/Maths/Mat4.hpp
+		src/Maths/Mat4.inl
+		src/Maths/Mat4.cpp
 		src/Maths/Vec2.hpp
 		src/Maths/Vec2.cpp
 		src/Maths/Vec3.hpp
