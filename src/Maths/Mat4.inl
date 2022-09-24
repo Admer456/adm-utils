@@ -107,7 +107,7 @@ namespace adm
 	// ============================
 	inline void Mat4::Transpose3()
 	{
-#if !ADM_USE_SSE41
+#if ADM_USE_SSE41
 		const __m128 zero = _mm_setzero_ps();
 		const __m128 tmp1 = _mm_shuffle_ps( columns[0].simdValue, columns[1].simdValue, _MM_SHUFFLE( 1, 0, 1, 0 ) );
 		const __m128 tmp3 = _mm_shuffle_ps( columns[0].simdValue, columns[1].simdValue, _MM_SHUFFLE( 3, 2, 3, 2 ) );
