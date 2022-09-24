@@ -148,41 +148,55 @@ namespace adm
 		// Vec4 + Vec4 
 		inline Vec4 		operator+ ( const Vec4& rhs ) const
 		{
+#if ADM_USE_SSE41
+			return Vec4{ _mm_add_ps( simdValue, rhs.simdValue ) };
+#else
 			return Vec4{
 				m.x + rhs.m.x,
 				m.y + rhs.m.y,
 				m.z + rhs.m.z,
 				m.w + rhs.m.w
 			};
+#endif
 		}
 		// Vec4 - Vec4
 		inline Vec4			operator- ( const Vec4& rhs ) const
 		{
+#if ADM_USE_SSE41
+			return Vec4{ _mm_sub_ps( simdValue, rhs.simdValue ) };
+#else
 			return Vec4{
 				m.x - rhs.m.x,
 				m.y - rhs.m.y,
 				m.z - rhs.m.z,
 				m.w - rhs.m.w
 			};
+#endif
 		}
 		// += Vec4
 		inline const Vec4& 	operator+= ( const Vec4& rhs )
 		{
+#if ADM_USE_SSE41
+			simdValue = _mm_add_ps( simdValue, rhs.simdValue );
+#else
 			m.x += rhs.m.x;
 			m.y += rhs.m.y;
 			m.z += rhs.m.z;
 			m.w += rhs.m.w;
-
+#endif
 			return *this;
 		}
 		// -= Vec4
 		inline const Vec4& 	operator-= ( const Vec4& rhs )
 		{
+#if ADM_USE_SSE41
+			simdValue = _mm_sub_ps( simdValue, rhs.simdValue );
+#else
 			m.x -= rhs.m.x;
 			m.y -= rhs.m.y;
 			m.z -= rhs.m.z;
 			m.w -= rhs.m.w;
-
+#endif
 			return *this;
 		}
 		// -Vec4
@@ -198,11 +212,14 @@ namespace adm
 		// Vec4 = Vec4
 		inline const Vec4& 	operator= ( const Vec4& rhs )
 		{
+#if ADM_USE_SSE41
+			simdValue = rhs.simdValue;
+#else
 			m.x = rhs.m.x;
 			m.y = rhs.m.y;
 			m.z = rhs.m.z;
 			m.w = rhs.m.w;
-
+#endif
 			return *this;
 		}
 		// Vec4 * Vec4, dot product
