@@ -25,6 +25,7 @@ namespace adm
 		// Vec4 does not default-initialise stuff, and so,
 		// neither will we here for performance reasons
 		Mat4() = default;
+		constexpr Mat4( float n ) : columns{ Vec4{ n }, Vec4{ n }, Vec4{ n }, Vec4{ n } } {}
 		constexpr Mat4( Vec4 c0, Vec4 c1, Vec4 c2, Vec4 c3 ) : columns{ c0, c1, c2, c3 } {}
 		constexpr Mat4( SimdType c0, SimdType c1, SimdType c2, SimdType c3 ) : columns{ c0, c1, c2, c3 } {}
 		constexpr Mat4( const Mat4& mat ) = default;

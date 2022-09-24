@@ -41,3 +41,13 @@ Mat4 Mat4::Orthographic( float left, float right, float bottom, float top, float
 		Vec4{ 0.0f,  0.0f,   0.0f,         1.0f }
 	};
 }
+
+const Mat4 Mat4::Identity = Mat4{
+	Vec4{ 1.0f, 0.0f, 0.0f, 0.0f },
+	Vec4{ 0.0f, 1.0f, 0.0f, 0.0f },
+	Vec4{ 0.0f, 0.0f, 1.0f, 0.0f },
+	Vec4{ 0.0f, 0.0f, 0.0f, 1.0f }
+};
+
+const Mat4 Mat4::One = Mat4{ 1.0f };
+const Mat4 Mat4::Zero = Mat4{ 0.0f };
