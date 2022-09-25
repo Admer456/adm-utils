@@ -14,8 +14,8 @@ Mat4 Mat4::Perspective( float fovY, float aspectRatio, float zNear, float zFar )
 	return Mat4{
 		Vec4{ width, 0.0f, 0.0f, 0.0f },
 		Vec4{ 0.0f, height, 0.0f, 0.0f },
-		Vec4{ 0.0f, 0.0f, range, -1.0f },
-		Vec4{ 0.0f, 0.0f, range * zNear, 0.0f }
+		Vec4{ 0.0f, 0.0f, range, range * zNear },
+		Vec4{ 0.0f, 0.0f, -1.0f, 0.0f }
 	};
 }
 
