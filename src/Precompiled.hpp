@@ -65,6 +65,21 @@ namespace adm
 
 	template<class T>
 	using WeakPtr = std::weak_ptr<T>;
+
+	// TODO: move to its own header
+	template<class TValue>
+	auto FindIterator( Vector<UniquePtr<TValue>>& v, const TValue* t )
+	{
+		for ( auto it = v.begin(); it != v.end(); it++ )
+		{
+			if ( t == it->get() )
+			{
+				return it;
+			}
+		}
+	
+		return v.end();
+	}
 }
 
 // The most basic thing of all
