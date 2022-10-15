@@ -36,6 +36,8 @@ namespace adm
 	class Dictionary final
 	{
 	public:
+		using DictionaryMap = Map<String, String>;
+
 		Dictionary();
 		Dictionary( Dictionary&& dict ) noexcept;
 		Dictionary( const Dictionary& dict );
@@ -75,12 +77,33 @@ namespace adm
 			return pairs[keyname];
 		}
 
+		DictionaryMap::iterator begin()
+		{
+			return pairs.begin();
+		}
+
+		DictionaryMap::const_iterator begin() const
+		{
+			return pairs.begin();
+		}
+
+		DictionaryMap::iterator end()
+		{
+			return pairs.end();
+		}
+		
+		DictionaryMap::const_iterator end() const
+		{
+			return pairs.end();
+		}
+
+
 	private:
 		inline const char* GetStringDirect( const char* keyname ) const
 		{
 			return pairs.at( keyname ).c_str();
 		}
 
-		Map<String, String> pairs;
+		DictionaryMap pairs;
 };
 }
