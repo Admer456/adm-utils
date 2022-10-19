@@ -11,7 +11,7 @@ namespace adm
 	// Variadic string formatting
 	// Should be threadsafe, so long as each thread uses a different 'slot'
 	template<uint32_t slot = 0, bool DebugFormat = false>
-	inline char* format( char* formatString, ... )
+	inline char* format( const char* formatString, ... )
 	{
 		// Hoping the compiler won't optimise this away
 		constexpr uint32_t localSlot = slot;
